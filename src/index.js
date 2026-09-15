@@ -114,12 +114,14 @@ async function handleEOI(request, env) {
       body: JSON.stringify(emailPayload)
     });
     if (resp.status >= 300 && resp.status !== 202) {
-      console.error('MailChannels error', resp.status, await resp.text());
-      return redirectTo('/eoi.html?error=send', request);
+      const errBody = await resp.text();
+      console.error('MailChannels error', resp.status, errBody);
+      const detail = encodeURIComponent(errBody.slice(0, 160).replace(/[\r\n\t]/g, ' '));
+      return redirectTo(`/eoi.html?error=send&code=${resp.status}&details=${detail}`, request);
     }
   } catch (err) {
     console.error('MailChannels fetch failed', err);
-    return redirectTo('/eoi.html?error=send', request);
+    return redirectTo(`/eoi.html?error=send&details=${encodeURIComponent(String(err.message || err))}`, request);
   }
 
   return redirectTo('/eoi-sent.html', request);

@@ -160,10 +160,16 @@ export const pages = [
   var err = params.get('error');
   var alert = document.getElementById('eoi-alert');
   if(err && alert){
+    var code = params.get('code');
+    var details = params.get('details');
+    var sendMsg = 'Something went wrong sending your submission. Please try again or email info@civics.au directly.';
+    if(code || details){
+      sendMsg = 'Email delivery failed' + (code ? ' (HTTP ' + code + ')' : '') + (details ? ': ' + details : '') + '. Please verify the MailChannels DNS TXT record or email info@civics.au directly.';
+    }
     var msgs = {
       validation: 'Please fill in your name and a valid email address.',
       captcha: 'The CAPTCHA check did not pass. Please try again.',
-      send: 'Something went wrong sending your submission. Please try again or email info@civics.au directly.'
+      send: sendMsg
     };
     alert.textContent = msgs[err] || 'An unexpected error occurred. Please try again.';
     alert.style.display = 'block';
