@@ -1,3 +1,21 @@
+// Responsive nav hamburger toggle
+const navToggle = document.querySelector('.nav-toggle');
+if (navToggle) {
+  const nav = navToggle.closest('.nav');
+  navToggle.addEventListener('click', () => {
+    const open = nav.getAttribute('aria-expanded') === 'true';
+    nav.setAttribute('aria-expanded', String(!open));
+    navToggle.setAttribute('aria-expanded', String(!open));
+  });
+  // Close nav when a link is clicked (mobile UX)
+  nav.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
 const budget = document.querySelector('[data-budget]');
 if (budget) {
   const fields = [...budget.querySelectorAll('input')];
