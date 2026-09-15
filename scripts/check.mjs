@@ -31,4 +31,19 @@ for (const page of pages) {
  }
  console.log(`Checked ${filename}`);
 }
-console.log(`Passed: ${pages.length} pages, ${links} local links and assets, anchors and content consistency.`);
+
+// Verify 404.html
+await access(path.join(root, '404.html'));
+await access(path.join(root, 'dist', '404.html'));
+
+// Verify dist assets
+for (const page of pages) {
+ await access(path.join(root, 'dist', `${page.slug}.html`));
+}
+await access(path.join(root, 'dist', 'assets', 'styles.css'));
+await access(path.join(root, 'dist', 'assets', 'site.js'));
+await access(path.join(root, 'dist', 'assets', 'favicon.svg'));
+await access(path.join(root, 'dist', 'assets', 'grounds.svg'));
+
+console.log(`Passed: ${pages.length} pages, 404 handler, dist bundle integrity, ${links} local links and assets.`);
+
