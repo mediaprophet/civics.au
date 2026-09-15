@@ -18,8 +18,5 @@
       "pattern": "dev.civics.au",
       "custom_domain": true
     }
-  ],
-  "vars": {
-    "TURNSTILE_SECRET": "1x0000000000000000000000000000000AA"
-  }
+  ]
 }
