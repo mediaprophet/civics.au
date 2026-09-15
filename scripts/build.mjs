@@ -34,3 +34,12 @@ await writeFile(path.join(root, '404.html'), notFoundHtml);
 await writeFile(path.join(dist, '404.html'), notFoundHtml);
 console.log('Built 404.html');
 
+// Generate EOI success page (eoi-sent.html)
+const sentNav = pages.map((p, i) => `<a href="${p.slug}.html"><span class="num">0${i}</span>${escape(p.nav)}</a>`).join('');
+const sentBody = `<header class="page-head"><p class="eyebrow">Expression of interest</p><h1>Thank you — we'll be in touch.</h1><p class="intro">Your expression of interest has been received and forwarded to the civics.au team at info@civics.au.</p></header><div class="reading"><article class="article"><div class="eoi-success"><h3>What happens next?</h3><p>A member of the team will review your submission and respond by email within a few business days. If you have an urgent enquiry, you can also reach us directly at <a href="mailto:info@civics.au">info@civics.au</a>.</p></div><p style="margin-top:2.5rem"><a class="button" href="index.html">Return to the overview <span aria-hidden="true">↗</span></a></p></article></div>`;
+const sentHtml = `<!doctype html>\n<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Expression of interest received | civics.au</title><meta name="description" content="Your expression of interest has been received by the civics.au team."><meta name="theme-color" content="#183e37"><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="assets/styles.css"><script src="assets/site.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="masthead">${brand}<span class="mast-note">Ideas for a more resilient society<br>Australia → the world</span></header><nav class="nav" aria-label="Main navigation">${sentNav}</nav><main id="main">${sentBody}</main><footer class="footer"><span>civics.au / Community Grounds · Concept collection · September 2026</span><div><a href="review.html#sources">Sources & scope</a><a href="review.html#pilot-questions">Questions for a pilot</a></div></footer></div></body></html>\n`;
+await writeFile(path.join(root, 'eoi-sent.html'), sentHtml);
+await writeFile(path.join(dist, 'eoi-sent.html'), sentHtml);
+console.log('Built eoi-sent.html');
+
+

@@ -1,12 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "civics-au",
+  "main": "src/index.js",
   "compatibility_date": "2026-09-11",
   "observability": {
     "enabled": true
   },
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },
@@ -15,5 +17,8 @@
       "pattern": "dev.civics.au",
       "custom_domain": true
     }
-  ]
+  ],
+  "vars": {
+    "TURNSTILE_SECRET": "1x0000000000000000000000000000000AA"
+  }
 }

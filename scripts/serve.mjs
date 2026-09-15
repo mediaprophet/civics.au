@@ -6,9 +6,18 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.md': 'text/plain; charset=utf-8' };
 http.createServer(async (request, response) => {
  try {
-  const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+  const url = new URL(request.url, 'http://localhost');
+  const pathname = decodeURIComponent(url.pathname);
+
+  // Local stub: redirect POST /eoi to success page (no email in dev)
+  if (request.method === 'POST' && pathname === '/eoi') {
+    response.writeHead(303, { Location: '/eoi-sent.html' });
+    response.end();
+    return;
+  }
+
   const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
-  if (!(relative.match(/^(index|community-grounds|walkabout|infrastructure|digital-economy|cooperative-projects|journey-out|review|404)\.html$/) || relative.match(/^assets\/[a-z-]+\.(css|js|svg)$/))) {
+  if (!(relative.match(/^(index|community-grounds|walkabout|infrastructure|digital-economy|cooperative-projects|journey-out|review|eoi|eoi-sent|404)\.html$/) || relative.match(/^assets\/[a-z0-9._-]+\.(css|js|svg)$/))) {
     const notFoundData = await readFile(path.join(root, '404.html'));
     response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
     response.end(notFoundData);

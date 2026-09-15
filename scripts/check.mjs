@@ -32,9 +32,11 @@ for (const page of pages) {
  console.log(`Checked ${filename}`);
 }
 
-// Verify 404.html
+// Verify 404.html and eoi-sent.html
 await access(path.join(root, '404.html'));
 await access(path.join(root, 'dist', '404.html'));
+await access(path.join(root, 'eoi-sent.html'));
+await access(path.join(root, 'dist', 'eoi-sent.html'));
 
 // Verify dist assets
 for (const page of pages) {
@@ -45,5 +47,5 @@ await access(path.join(root, 'dist', 'assets', 'site.js'));
 await access(path.join(root, 'dist', 'assets', 'favicon.svg'));
 await access(path.join(root, 'dist', 'assets', 'grounds.svg'));
 
-console.log(`Passed: ${pages.length} pages, 404 handler, dist bundle integrity, ${links} local links and assets.`);
+console.log(`Passed: ${pages.length} pages, 404 handler, eoi-sent, dist bundle integrity, ${links} local links and assets.`);
 

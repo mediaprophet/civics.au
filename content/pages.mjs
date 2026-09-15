@@ -92,6 +92,99 @@ export const pages = [
       { id: 'economic-thesis', title: 'The economic proposition', html: `<p>The core economic thesis inverts traditional landlordism by coupling physical shelter with <strong>generative physical and digital infrastructure</strong>. Commercial rooftop solar exports, battery grid arbitrage, and local edge compute services generate external site revenue, decoupling the ground's operational viability from high rental extraction. This allows grounds to maintain a <strong>$15/night ($105/week) concession floor</strong> (30% of commercial rates, or 17.5% of income) alongside standard nomad ($30–$35/night) and commercial ($50/night) tariffs.</p><p>A practical demonstration must validate these revenue interactions, demand patterns, and resident outcomes under real-world conditions.</p><div class="table-wrap"><table><thead><tr><th>Economic Hypothesis</th><th>Evidence a Pilot Would Need to Verify</th></tr></thead><tbody><tr><td><strong>Generative Revenue Decoupling:</strong> Solar exports and edge compute cover baseline site capital and utility overheads.</td><td>Net metered solar generation, feed-in revenues, battery arbitrage margins, and local compute service fees measured across all seasons.</td></tr><tr><td><strong>Living Cost Viability ($15/night floor):</strong> Concession card holders live sustainably within ~$600/wk without entering crisis debt.</td><td>Actual resident budgets, essential living expenses, vehicle upkeep reserves, and verified savings buffers.</td></tr><tr><td><strong>Universal Safe Haven:</strong> Shelter remains secure even if residents are severely unwell or unable to contribute sweat equity.</td><td>Continuity of stay during illness, non-punitive tenancy records, and absence of eviction due to temporary loss of task capacity.</td></tr><tr><td><strong>Tiered Cross-Subsidisation:</strong> Full-fee tourists ($50/night) and nomads ($30–$35/night) support site reserves.</td><td>Seasonal occupancy splits, revenue per site category, and net contribution to shared tooling and maintenance reserves.</td></tr><tr><td><strong>Catalytic Public Spending:</strong> Co-investment in regional civics assets yields higher return than emergency motels.</td><td>Comparative cost per person-day between temporary crisis hotel vouchers and permanent, multi-use community ground infrastructure.</td></tr></tbody></table></div><p class="small">This proposal establishes a dignified, asset-building alternative for transitional living; it operates alongside traditional homelessness services and permanent social housing.</p>` },
       { id: 'pilot-questions', title: 'Decisions before a pilot', html: `<details open><summary>Where could a first ground work?</summary><p>Identify a candidate with willing local partners. Assess existing users, ownership, amenities, roofs, energy demand, access, hazards, permissions and event commitments. No pilot location has been selected in the source.</p></details><details><summary>Who is it for, and what does participation mean?</summary><p>Define suitability, accessibility, length of stay, fees, residents' rights, support options and an exit pathway. Involve intended participants in the design.</p></details><details><summary>Who pays, owns and operates?</summary><p>Separate infrastructure funding, home or vehicle finance and ongoing operations. Identify who owns each asset, holds obligations and covers repairs or revenue shortfalls. The proposed public fund is not an announced funding commitment.</p></details><details><summary>What is the smallest useful first stage?</summary><p>Agree which basic facilities and support must work from day one. Later energy coordination, digital portability and international adaptation can be developed from evidence gathered at the first ground.</p></details><details><summary>How would success—or failure—be recognised?</summary><p>Set baseline measures, a review period and decision criteria with residents and local partners. Include cost overruns, poor living conditions, operational disruption and exclusion as possible findings to act on.</p></details>` },
       { id: 'sources', title: 'Sources & scope', html: `<ol class="source-list"><li><strong>Exploratory concept strategy: Resilient Transitional Human Renewal Strategy</strong><small>Primary concept source. Originating working notes outlining author intentions, community grounds infrastructure, and exploratory models.</small></li><li><a href="https://github.com/mediaprophet/Solid-CSS-Databox">Solid-CSS-Databox (GitHub)</a><small>Open-source reference architecture for containerised Community Solid Server (CSS) edge appliances, IoT telemetry and W3C Solid-interoperable local data pods.</small></li><li><a href="https://solidproject.org/about">Solid Project — About Solid</a><small>Open-standard specification enabling interoperability across diverse systems and technologies. Consulted 15 September 2026; not a proprietary specification for this project.</small></li><li><a href="https://projectconnect.unicef.org/">UNICEF — Project Connect</a><small>External initiative referenced by the author. Included as context, not evidence of affiliation or delivery commitments.</small></li></ol><p>These are initial concept pages for review. Detailed legal, engineering, funding and financial feasibility work remains to be done for a specific implementation.</p>` }
-    ], next: 'index'
+    ], next: 'eoi'
+  },
+  {
+    slug: 'eoi', nav: 'Express interest', title: 'Express an Interest.',
+    description: 'Share your interest in the civics.au Community Grounds initiative — whether as a potential resident, council partner, investor, researcher, or community supporter.',
+    eyebrow: '08 / Express interest', intro: 'Tell us who you are and how you might be involved. All submissions go directly to the team at info@civics.au.',
+    sections: [
+      { id: 'eoi-form', title: 'Expression of interest form', html: `<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<div id="eoi-alert" class="eoi-alert" role="alert" aria-live="polite" style="display:none"></div>
+<form id="eoi" class="eoi-form" method="post" action="/eoi" novalidate>
+  <input type="text" name="website" id="eoi-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none!important;position:absolute;left:-9999px">
+  <div class="eoi-row eoi-row--half">
+    <div class="eoi-field">
+      <label for="eoi-name">Full name <span class="eoi-req" aria-hidden="true">*</span></label>
+      <input type="text" id="eoi-name" name="name" autocomplete="name" required placeholder="Your name">
+    </div>
+    <div class="eoi-field">
+      <label for="eoi-email">Email address <span class="eoi-req" aria-hidden="true">*</span></label>
+      <input type="email" id="eoi-email" name="email" autocomplete="email" required placeholder="you@example.com">
+    </div>
+  </div>
+  <div class="eoi-row eoi-row--half">
+    <div class="eoi-field">
+      <label for="eoi-phone">Phone <span class="eoi-opt">(optional)</span></label>
+      <input type="tel" id="eoi-phone" name="phone" autocomplete="tel" placeholder="04xx xxx xxx">
+    </div>
+    <div class="eoi-field">
+      <label for="eoi-state">State / Territory</label>
+      <select id="eoi-state" name="state">
+        <option value="">— Select —</option>
+        <option>ACT</option><option>NSW</option><option>NT</option>
+        <option>QLD</option><option>SA</option><option>TAS</option>
+        <option>VIC</option><option>WA</option><option>International</option>
+      </select>
+    </div>
+  </div>
+  <div class="eoi-field">
+    <label for="eoi-interest">How are you interested in this initiative?</label>
+    <select id="eoi-interest" name="interest">
+      <option value="">— Select the closest match —</option>
+      <option>I am looking for a place to stay (potential resident)</option>
+      <option>I represent a local council or regional authority</option>
+      <option>I am part of a community or volunteer organisation</option>
+      <option>I have a showground, oval, or suitable property</option>
+      <option>I am a regional investor or developer</option>
+      <option>I am a researcher or academic</option>
+      <option>I am from media or journalism</option>
+      <option>Other interest</option>
+    </select>
+  </div>
+  <div class="eoi-field">
+    <label for="eoi-message">Message <span class="eoi-opt">(optional)</span></label>
+    <textarea id="eoi-message" name="message" rows="6" placeholder="Tell us a bit about your situation, your questions, or how you might be able to help."></textarea>
+  </div>
+  <div class="eoi-turnstile">
+    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
+    <p class="eoi-privacy">Your information is sent directly to the team. We do not share it with third parties. The CAPTCHA above is provided by <a href="https://www.cloudflare.com/products/turnstile/" target="_blank" rel="noopener">Cloudflare Turnstile</a> — it does not use cookies or track your behaviour.</p>
+  </div>
+  <div class="eoi-actions">
+    <button type="submit" id="eoi-submit" class="button">Send expression of interest <span aria-hidden="true">↗</span></button>
+  </div>
+</form>
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var err = params.get('error');
+  var alert = document.getElementById('eoi-alert');
+  if(err && alert){
+    var msgs = {
+      validation: 'Please fill in your name and a valid email address.',
+      captcha: 'The CAPTCHA check did not pass. Please try again.',
+      send: 'Something went wrong sending your submission. Please try again or email info@civics.au directly.'
+    };
+    alert.textContent = msgs[err] || 'An unexpected error occurred. Please try again.';
+    alert.style.display = 'block';
+  }
+  var form = document.getElementById('eoi');
+  if(form){
+    form.addEventListener('submit', function(e){
+      var name = form.querySelector('#eoi-name').value.trim();
+      var email = form.querySelector('#eoi-email').value.trim();
+      if(!name || !email || !email.includes('@')){
+        e.preventDefault();
+        if(alert){
+          alert.textContent = 'Please fill in your name and a valid email address.';
+          alert.style.display = 'block';
+          alert.scrollIntoView({behavior:'smooth',block:'nearest'});
+        }
+      }
+    });
+  }
+})();
+</script>` }
+    ]
   }
 ];
