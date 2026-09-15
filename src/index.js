@@ -96,31 +96,41 @@ async function handleEOI(request, env) {
 
   const body = buildEmailBody({ name, email, phone, state, interest, message });
 
+  const resendApiKey = env.RESEND_API_KEY;
+  if (!resendApiKey) {
+    console.error('Missing RESEND_API_KEY binding');
+    return redirectTo('/eoi.html?error=send&details=RESEND_API_KEY+is+not+configured', request);
+  }
+
+  const fromSender = env.RESEND_FROM || 'civics.au <noreply@civics.au>';
+
   const emailPayload = {
-    personalizations: [{ to: [{ email: RECIPIENT, name: 'civics.au Team' }] }],
-    from:     { email: FROM_ADDRESS, name: FROM_NAME },
-    reply_to: { email: email, name: name },
-    subject:  `[EOI] ${name} — ${interest || 'Expression of Interest'}`,
-    content: [
-      { type: 'text/plain', value: body.text },
-      { type: 'text/html',  value: body.html }
-    ]
+    from: fromSender,
+    to: [RECIPIENT],
+    reply_to: email,
+    subject: `[EOI] ${name} — ${interest || 'Expression of Interest'}`,
+    text: body.text,
+    html: body.html
   };
 
   try {
-    const resp = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const resp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(emailPayload)
     });
-    if (resp.status >= 300 && resp.status !== 202) {
+
+    if (!resp.ok) {
       const errBody = await resp.text();
-      console.error('MailChannels error', resp.status, errBody);
+      console.error('Resend error', resp.status, errBody);
       const detail = encodeURIComponent(errBody.slice(0, 160).replace(/[\r\n\t]/g, ' '));
       return redirectTo(`/eoi.html?error=send&code=${resp.status}&details=${detail}`, request);
     }
   } catch (err) {
-    console.error('MailChannels fetch failed', err);
+    console.error('Resend fetch failed', err);
     return redirectTo(`/eoi.html?error=send&details=${encodeURIComponent(String(err.message || err))}`, request);
   }
 
