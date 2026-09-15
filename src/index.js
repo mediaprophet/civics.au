@@ -28,8 +28,9 @@ const TEST_SECRET = '1x0000000000000000000000000000000AA';
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const cleanPath = url.pathname.replace(/\/$/, '');
 
-    if (request.method === 'POST' && url.pathname === '/eoi') {
+    if (request.method === 'POST' && (cleanPath === '/eoi' || cleanPath === '/eoi.html')) {
       return handleEOI(request, env);
     }
 
@@ -48,7 +49,7 @@ async function handleEOI(request, env) {
   try {
     formData = await request.formData();
   } catch {
-    return redirectTo('/eoi.html?error=validation');
+    return redirectTo('/eoi.html?error=validation', request);
   }
 
   const honeypot  = formData.get('website') || '';
@@ -61,15 +62,15 @@ async function handleEOI(request, env) {
   const message   = sanitise(formData.get('message') || '');
 
   // Silent drop for bots filling the honeypot
-  if (honeypot) return redirectTo('/eoi-sent.html');
+  if (honeypot) return redirectTo('/eoi-sent.html', request);
 
   // Basic field validation
   if (!name || !email || !email.includes('@')) {
-    return redirectTo('/eoi.html?error=validation');
+    return redirectTo('/eoi.html?error=validation', request);
   }
 
   // ── Turnstile verification ─────────────────────────────────────────────────
-  if (!token) return redirectTo('/eoi.html?error=captcha');
+  if (!token) return redirectTo('/eoi.html?error=captcha', request);
 
   const secret = env.TURNSTILE_SECRET || TEST_SECRET;
   const ip     = request.headers.get('CF-Connecting-IP') || '';
@@ -84,12 +85,12 @@ async function handleEOI(request, env) {
   try {
     verifyData = await verifyResp.json();
   } catch {
-    return redirectTo('/eoi.html?error=captcha');
+    return redirectTo('/eoi.html?error=captcha', request);
   }
 
   if (!verifyData.success) {
     console.error('Turnstile verification failed', verifyData['error-codes']);
-    return redirectTo('/eoi.html?error=captcha');
+    return redirectTo('/eoi.html?error=captcha', request);
   }
   // ──────────────────────────────────────────────────────────────────────────
 
@@ -114,18 +115,19 @@ async function handleEOI(request, env) {
     });
     if (resp.status >= 300 && resp.status !== 202) {
       console.error('MailChannels error', resp.status, await resp.text());
-      return redirectTo('/eoi.html?error=send');
+      return redirectTo('/eoi.html?error=send', request);
     }
   } catch (err) {
     console.error('MailChannels fetch failed', err);
-    return redirectTo('/eoi.html?error=send');
+    return redirectTo('/eoi.html?error=send', request);
   }
 
-  return redirectTo('/eoi-sent.html');
+  return redirectTo('/eoi-sent.html', request);
 }
 
-function redirectTo(path) {
-  return Response.redirect(`${SITE_ORIGIN}${path}`, 303);
+function redirectTo(path, request) {
+  const origin = request ? new URL(request.url).origin : SITE_ORIGIN;
+  return Response.redirect(`${origin}${path}`, 303);
 }
 
 function sanitise(str) {
