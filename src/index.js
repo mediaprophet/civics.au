@@ -54,18 +54,31 @@ async function handleEOI(request, env) {
 
   const honeypot  = formData.get('website') || '';
   const token     = formData.get('cf-turnstile-response') || '';
-  const name      = sanitise(formData.get('name') || '');
-  const email     = sanitise(formData.get('email') || '');
-  const phone     = sanitise(formData.get('phone') || '');
-  const state     = sanitise(formData.get('state') || '');
-  const interest  = sanitise(formData.get('interest') || '');
-  const message   = sanitise(formData.get('message') || '');
+  const name                  = sanitise(formData.get('name') || '');
+  const email                 = sanitise(formData.get('email') || '');
+  const organisation          = sanitise(formData.get('organisation') || '');
+  const role                  = sanitise(formData.get('role') || '');
+  const phone                 = sanitise(formData.get('phone') || '');
+  const state                 = sanitise(formData.get('state') || '');
+  const respondentType        = sanitise(formData.get('respondent_type') || '');
+  const geographicScope       = sanitise(formData.get('geographic_scope') || '');
+  const location              = sanitise(formData.get('location') || '');
+  const participationInterest = sanitiseAll(formData.getAll('participation_interest'));
+  const longerConnection      = sanitise(formData.get('longer_connection') || '');
+  const supportTypes          = sanitiseAll(formData.getAll('support_type'));
+  const fundingStage          = sanitise(formData.get('funding_stage') || '');
+  const timing                = sanitise(formData.get('timing') || '');
+  const offer                 = sanitise(formData.get('offer') || '');
+  const siteDetails           = sanitise(formData.get('site_details') || '');
+  const story                 = sanitise(formData.get('story') || '');
+  const message               = sanitise(formData.get('message') || '');
+  const publicationPermission = sanitise(formData.get('publication_permission') || 'private');
 
   // Silent drop for bots filling the honeypot
   if (honeypot) return redirectTo('/eoi-sent.html', request);
 
   // Basic field validation
-  if (!name || !email || !email.includes('@')) {
+  if (!name || !email || !email.includes('@') || !respondentType) {
     return redirectTo('/eoi.html?error=validation', request);
   }
 
@@ -94,7 +107,13 @@ async function handleEOI(request, env) {
   }
   // ──────────────────────────────────────────────────────────────────────────
 
-  const body = buildEmailBody({ name, email, phone, state, interest, message });
+  const submission = {
+    reference: crypto.randomUUID(), name, email, organisation, role, phone, state,
+    respondentType, geographicScope, location, participationInterest, longerConnection,
+    supportTypes, fundingStage, timing, offer, siteDetails, story, message, publicationPermission
+  };
+  const body = buildEmailBody(submission);
+  const rdfAttachment = buildRdfAttachment(submission);
 
   const resendApiKey = env.RESEND_API_KEY;
   if (!resendApiKey) {
@@ -108,9 +127,10 @@ async function handleEOI(request, env) {
     from: fromSender,
     to: [RECIPIENT],
     reply_to: email,
-    subject: `[EOI] ${name} — ${interest || 'Expression of Interest'}`,
+    subject: `[EOI] ${name} — ${label(respondentType) || 'Expression of Interest'}`,
     text: body.text,
-    html: body.html
+    html: body.html,
+    attachments: [rdfAttachment]
   };
 
   try {
@@ -142,32 +162,52 @@ function redirectTo(path, request) {
   return Response.redirect(`${origin}${path}`, 303);
 }
 
-function sanitise(str) {
-  return String(str).trim().slice(0, 2000);
+function sanitise(str, maxLength = 4000) {
+  return String(str).trim().slice(0, maxLength);
 }
 
-function buildEmailBody({ name, email, phone, state, interest, message }) {
+function sanitiseAll(values) {
+  return values.map(value => sanitise(value, 200)).filter(Boolean).slice(0, 20);
+}
+
+function label(value) {
+  return String(value || '').replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+}
+
+function display(value) {
+  if (Array.isArray(value)) return value.length ? value.map(label).join(', ') : '—';
+  return value || '—';
+}
+
+function buildEmailBody(submission) {
+  const {
+    reference, name, email, organisation, role, phone, state, respondentType, geographicScope,
+    location, participationInterest, longerConnection, supportTypes, fundingStage, timing,
+    offer, siteDetails, story, message, publicationPermission
+  } = submission;
   const now = new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' });
+  const rows = [
+    ['Reference', reference], ['Name', name], ['Email', email], ['Organisation', organisation],
+    ['Role', role], ['Phone', phone], ['State / Territory', state], ['Interest type', label(respondentType)],
+    ['Geographic scope', label(geographicScope)], ['Town, region or site', location],
+    ['Participation interest', display(participationInterest)], ['Longer location connection', longerConnection],
+    ['Support types', display(supportTypes)], ['Funding stage', label(fundingStage)], ['Indicative timing', timing],
+    ['Offer', offer], ['Site or facilities', siteDetails], ['Why it matters', story],
+    ['Further context', message], ['Publication permission', label(publicationPermission)]
+  ];
 
   const text = [
     'NEW EXPRESSION OF INTEREST — civics.au',
     '═'.repeat(50),
     '',
-    `Name:     ${name}`,
-    `Email:    ${email}`,
-    `Phone:    ${phone || '—'}`,
-    `State:    ${state || '—'}`,
-    `Interest: ${interest || '—'}`,
-    '',
-    'Message:',
-    '─'.repeat(40),
-    message || '(no message provided)',
-    '─'.repeat(40),
+    ...rows.map(([field, value]) => `${field}: ${display(value)}`),
     '',
     `Submitted: ${now} AEST`,
     '',
-    'Reply directly to this email to respond to the enquirer.',
+    'A private JSON-LD catalogue record is attached. Reply directly to this email to respond to the enquirer.',
   ].join('\n');
+
+  const htmlRows = rows.map(([field, value]) => `<div class="row"><span class="lbl">${escHtml(field)}</span><span class="val">${field === 'Email' ? `<a href="mailto:${escHtml(email)}">${escHtml(email)}</a>` : escHtml(display(value))}</span></div>`).join('');
 
   const html = `<!DOCTYPE html>
 <html lang="en-AU"><head><meta charset="utf-8"><style>
@@ -180,17 +220,69 @@ h1{font-size:22px;border-bottom:2px solid #183e37;padding-bottom:10px}
 .ft{margin-top:28px;font-size:12px;color:#596b61;border-top:1px solid #d7ddd1;padding-top:14px}
 </style></head><body>
 <h1>Expression of Interest — civics.au</h1>
-<div class="row"><span class="lbl">Name</span><span class="val">${escHtml(name)}</span></div>
-<div class="row"><span class="lbl">Email</span><span class="val"><a href="mailto:${escHtml(email)}">${escHtml(email)}</a></span></div>
-<div class="row"><span class="lbl">Phone</span><span class="val">${escHtml(phone || '—')}</span></div>
-<div class="row"><span class="lbl">State</span><span class="val">${escHtml(state || '—')}</span></div>
-<div class="row"><span class="lbl">Interest</span><span class="val">${escHtml(interest || '—')}</span></div>
-<h2 style="font-size:16px;margin:20px 0 8px">Message</h2>
-<div class="msg">${escHtml(message || '(no message provided)')}</div>
-<div class="ft">Submitted ${now} AEST via civics.au EOI form. Reply directly to respond to the enquirer.</div>
+${htmlRows}
+<div class="ft">Submitted ${now} AEST via civics.au EOI form. A private JSON-LD catalogue record is attached. Reply directly to respond to the enquirer.</div>
 </body></html>`;
 
   return { text, html };
+}
+
+function buildRdfAttachment(submission) {
+  const submittedAt = new Date().toISOString();
+  const { reference, name, email, organisation, role, phone, state, respondentType, geographicScope,
+    location, participationInterest, longerConnection, supportTypes, fundingStage, timing,
+    offer, siteDetails, story, message, publicationPermission } = submission;
+  const record = {
+    '@context': {
+      'schema': 'https://schema.org/',
+      'civics': 'https://civics.au/ns#',
+      'supportType': 'civics:supportType',
+      'respondentType': 'civics:respondentType',
+      'geographicScope': 'civics:geographicScope',
+      'publicationPermission': 'civics:publicationPermission',
+      'participationInterest': 'civics:participationInterest',
+      'privateIntake': 'civics:privateIntake'
+    },
+    '@id': `urn:uuid:${reference}`,
+    '@type': ['schema:CreativeWork', 'civics:ExpressionOfInterest'],
+    'schema:identifier': reference,
+    'schema:dateCreated': submittedAt,
+    'schema:isBasedOn': 'https://civics.au/eoi.html',
+    'privateIntake': true,
+    'respondentType': respondentType,
+    'geographicScope': geographicScope || undefined,
+    'schema:spatialCoverage': location || state ? { '@type': 'schema:Place', 'schema:name': location || state } : undefined,
+    'supportType': supportTypes.length ? supportTypes : undefined,
+    'participationInterest': participationInterest.length ? participationInterest : undefined,
+    'publicationPermission': publicationPermission,
+    'schema:author': {
+      '@type': organisation ? 'schema:Organization' : 'schema:Person',
+      'schema:name': organisation || name,
+      'schema:contactPoint': {
+        '@type': 'schema:ContactPoint', 'schema:name': name, 'schema:email': email,
+        'schema:telephone': phone || undefined, 'schema:jobTitle': role || undefined
+      }
+    },
+    'civics:longerLocationConnection': longerConnection || undefined,
+    'civics:fundingStage': fundingStage || undefined,
+    'civics:timing': timing || undefined,
+    'civics:offer': offer || undefined,
+    'civics:siteDetails': siteDetails || undefined,
+    'schema:abstract': story || undefined,
+    'schema:text': message || undefined
+  };
+  const json = JSON.stringify(record, null, 2);
+  return {
+    filename: `civics-eoi-${reference}.jsonld`,
+    content: base64Encode(json)
+  };
+}
+
+function base64Encode(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
 }
 
 function escHtml(str) {

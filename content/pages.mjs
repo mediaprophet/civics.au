@@ -95,12 +95,13 @@ export const pages = [
     ], next: 'eoi'
   },
   {
-    slug: 'eoi', nav: 'Express interest', title: 'Express an Interest.',
-    description: 'Share your interest in the civics.au Community Grounds initiative — whether as a potential resident, council partner, investor, researcher, or community supporter.',
-    eyebrow: '08 / Express interest', intro: 'Tell us who you are and how you might be involved. All submissions go directly to the team at info@civics.au.',
+    slug: 'eoi', nav: 'Express interest', title: 'Support, partnership & local opportunity.',
+    description: 'Register an expression of interest in supporting, informing or participating in a future civics.au Community Grounds pilot.',
+    eyebrow: '08 / Expression of interest', intro: 'We are seeking early conversations with people and organisations who may help shape, support or take part in future Community Grounds pilots.',
     sections: [
       { id: 'eoi-form', title: 'Expression of interest form', html: `<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <div id="eoi-alert" class="eoi-alert" role="alert" aria-live="polite" style="display:none"></div>
+<div class="eoi-context"><p><strong>Community Grounds are a proposal, not yet an operating program.</strong> We welcome expressions of interest from community organisations, businesses, foundations, service providers, landholders, researchers and people who may wish to participate. Support may be financial, practical, technical, in-kind or community-based. An EOI does not commit either party.</p><p>Grounds are proposed as participatory places for temporary stays, shared activity and local connection—not permanent residential estates. Subject to site arrangements and individual circumstances, participants would ordinarily move on after about three months.</p><p class="small">Visible non-government support may help inform future discussions about public co-investment. Any government participation would be subject to separate decisions, eligibility and approvals.</p></div>
 <form id="eoi" class="eoi-form" method="post" action="/eoi" novalidate>
   <input type="text" name="website" id="eoi-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none!important;position:absolute;left:-9999px">
   <div class="eoi-row eoi-row--half">
@@ -111,6 +112,16 @@ export const pages = [
     <div class="eoi-field">
       <label for="eoi-email">Email address <span class="eoi-req" aria-hidden="true">*</span></label>
       <input type="email" id="eoi-email" name="email" autocomplete="email" required placeholder="you@example.com">
+    </div>
+  </div>
+  <div class="eoi-row eoi-row--half">
+    <div class="eoi-field">
+      <label for="eoi-organisation">Organisation <span class="eoi-opt">(if applicable)</span></label>
+      <input type="text" id="eoi-organisation" name="organisation" autocomplete="organization" placeholder="Organisation or group name">
+    </div>
+    <div class="eoi-field">
+      <label for="eoi-role">Role <span class="eoi-opt">(if applicable)</span></label>
+      <input type="text" id="eoi-role" name="role" autocomplete="organization-title" placeholder="Your role or connection">
     </div>
   </div>
   <div class="eoi-row eoi-row--half">
@@ -129,26 +140,73 @@ export const pages = [
     </div>
   </div>
   <div class="eoi-field">
-    <label for="eoi-interest">How are you interested in this initiative?</label>
-    <select id="eoi-interest" name="interest">
+    <label for="eoi-respondent-type">What best describes your interest? <span class="eoi-req" aria-hidden="true">*</span></label>
+    <select id="eoi-respondent-type" name="respondent_type" required>
       <option value="">— Select the closest match —</option>
-      <option>I am looking for a place to stay (potential resident)</option>
-      <option>I represent a local council or regional authority</option>
-      <option>I am part of a community or volunteer organisation</option>
-      <option>I have a showground, oval, or suitable property</option>
-      <option>I am a regional investor or developer</option>
-      <option>I am a researcher or academic</option>
-      <option>I am from media or journalism</option>
-      <option>Other interest</option>
+      <option value="participant">I may wish to participate in a future Community Ground</option>
+      <option value="community-organisation">I represent a community or volunteer organisation</option>
+      <option value="business-service-provider">I represent a business, retailer or service provider</option>
+      <option value="funder">I represent a foundation, funder or social investor</option>
+      <option value="site-landholder">I have a potential site, land, venue or facilities</option>
+      <option value="research-technical">I can offer research, technical or professional expertise</option>
+      <option value="government-public-body">I represent a government or public body</option>
+      <option value="media">I am from media or journalism</option>
+      <option value="other">Another form of interest</option>
     </select>
   </div>
+
+  <fieldset class="eoi-fieldset" id="eoi-shared-support">
+    <legend>Where could this be relevant?</legend>
+    <div class="eoi-row eoi-row--half">
+      <div class="eoi-field"><label for="eoi-scope">Geographic scope</label><select id="eoi-scope" name="geographic_scope"><option value="">— Select —</option><option value="national">National or multi-region</option><option value="state-territory">A state or territory</option><option value="regional-local">A particular regional or local area</option><option value="specific-site">A particular site or property</option><option value="unsure">Not sure yet</option></select></div>
+      <div class="eoi-field"><label for="eoi-location">Town, region or site <span class="eoi-opt">(optional)</span></label><input type="text" id="eoi-location" name="location" placeholder="e.g. Northern Rivers, NSW"></div>
+    </div>
+  </fieldset>
+
+  <fieldset class="eoi-branch" data-for="participant" hidden>
+    <legend>Participation interest</legend>
+    <p class="eoi-help">This is an early EOI, not an application for a place to stay.</p>
+    <div class="eoi-checks"><label><input type="checkbox" name="participation_interest" value="temporary-stay"> A temporary stay at a future ground</label><label><input type="checkbox" name="participation_interest" value="shared-activities"> Shared activities, projects or contribution</label><label><input type="checkbox" name="participation_interest" value="practical-support"> Access to practical support</label><label><input type="checkbox" name="participation_interest" value="local-connection"> A connection to a particular place or community</label></div>
+    <div class="eoi-field"><label for="eoi-longer-connection">Is there a reason you may need to remain connected to one location for longer? <span class="eoi-opt">(optional)</span></label><textarea id="eoi-longer-connection" name="longer_connection" rows="3" placeholder="Please do not include sensitive personal or medical details at this stage."></textarea></div>
+  </fieldset>
+
+  <fieldset class="eoi-branch" data-for="community-organisation business-service-provider funder site-landholder research-technical government-public-body other" hidden>
+    <legend>How might you or your organisation contribute?</legend>
+    <div class="eoi-checks"><label><input type="checkbox" name="support_type" value="funding"> Philanthropic, catalytic or project funding</label><label><input type="checkbox" name="support_type" value="social-investment"> Social investment or patient capital</label><label><input type="checkbox" name="support_type" value="land-facilities"> Land, venue, facilities or accommodation</label><label><input type="checkbox" name="support_type" value="products-services"> Products, equipment or skilled services</label><label><input type="checkbox" name="support_type" value="discounts"> Discounts or in-kind offers</label><label><input type="checkbox" name="support_type" value="employment-training"> Employment, training, volunteering or inclusion activities</label><label><input type="checkbox" name="support_type" value="research-advice"> Research, evaluation or professional advice</label><label><input type="checkbox" name="support_type" value="community-delivery"> Community engagement or local delivery partnership</label><label><input type="checkbox" name="support_type" value="other"> Another kind of support</label></div>
+  </fieldset>
+
+  <fieldset class="eoi-branch" data-for="funder" hidden>
+    <legend>Funding conversation</legend>
+    <div class="eoi-row eoi-row--half"><div class="eoi-field"><label for="eoi-funding-stage">Stage of interest</label><select id="eoi-funding-stage" name="funding_stage"><option value="">— Select —</option><option value="exploring">Exploring the proposal</option><option value="briefing">Interested in a briefing</option><option value="pilot">Interested in a pilot conversation</option><option value="future-co-investment">Considering future co-investment</option></select></div><div class="eoi-field"><label for="eoi-timing">Indicative timing <span class="eoi-opt">(optional)</span></label><input type="text" id="eoi-timing" name="timing" placeholder="e.g. next 6–12 months"></div></div>
+  </fieldset>
+
+  <fieldset class="eoi-branch" data-for="business-service-provider" hidden>
+    <legend>Service, product or discount offer</legend>
+    <div class="eoi-field"><label for="eoi-offer">What could you offer? <span class="eoi-opt">(optional)</span></label><textarea id="eoi-offer" name="offer" rows="4" placeholder="Describe the product, service, discount, capacity or conditions."></textarea></div>
+  </fieldset>
+
+  <fieldset class="eoi-branch" data-for="site-landholder" hidden>
+    <legend>Potential site or facilities</legend>
+    <div class="eoi-field"><label for="eoi-site-details">What is available? <span class="eoi-opt">(optional)</span></label><textarea id="eoi-site-details" name="site_details" rows="4" placeholder="Location, facilities, ownership or permission position, and any known constraints."></textarea></div>
+  </fieldset>
+
   <div class="eoi-field">
-    <label for="eoi-message">Message <span class="eoi-opt">(optional)</span></label>
-    <textarea id="eoi-message" name="message" rows="6" placeholder="Tell us a bit about your situation, your questions, or how you might be able to help."></textarea>
+    <label for="eoi-story">Why does this proposal matter to you? <span class="eoi-opt">(optional)</span></label>
+    <textarea id="eoi-story" name="story" rows="5" placeholder="Share the need, opportunity, experience or local context that makes you interested."></textarea>
   </div>
+  <div class="eoi-field">
+    <label for="eoi-message">Anything else we should know? <span class="eoi-opt">(optional)</span></label>
+    <textarea id="eoi-message" name="message" rows="4" placeholder="Questions, a proposed next step, or further context."></textarea>
+  </div>
+
+  <fieldset class="eoi-fieldset eoi-consent">
+    <legend>How may we use what you share?</legend>
+    <p class="eoi-help">Your submission is private by default. We will contact you for confirmation before publishing a story, quotation, organisation name or identifying detail.</p>
+    <div class="eoi-radios"><label><input type="radio" name="publication_permission" value="private" checked> Keep this submission private; use it only to respond to this EOI.</label><label><input type="radio" name="publication_permission" value="private-discussion"> The team may discuss it privately with prospective delivery or funding partners.</label><label><input type="radio" name="publication_permission" value="anonymised-contact"> You may contact me about publishing an anonymised summary or quotation.</label><label><input type="radio" name="publication_permission" value="named-contact"> You may contact me about publishing an approved named summary or quotation.</label></div>
+  </fieldset>
   <div class="eoi-turnstile">
     <div class="cf-turnstile" data-sitekey="0x4AAAAAAE1cw59__Sm6r8Qa" data-theme="light"></div>
-    <p class="eoi-privacy">Your information is sent directly to the team. We do not share it with third parties. The CAPTCHA above is provided by <a href="https://www.cloudflare.com/products/turnstile/" target="_blank" rel="noopener">Cloudflare Turnstile</a> — it does not use cookies or track your behaviour.</p>
+    <p class="eoi-privacy">Your information is sent directly to the civics.au team, with a private JSON-LD record attached for internal cataloguing. We do not publish or share identifying information without your confirmation. The CAPTCHA above is provided by <a href="https://www.cloudflare.com/products/turnstile/" target="_blank" rel="noopener">Cloudflare Turnstile</a> — it does not use cookies or track your behaviour.</p>
   </div>
   <div class="eoi-actions">
     <button type="submit" id="eoi-submit" class="button">Send expression of interest <span aria-hidden="true">↗</span></button>
@@ -164,7 +222,7 @@ export const pages = [
     var details = params.get('details');
     var sendMsg = 'Something went wrong sending your submission. Please try again or email info@civics.au directly.';
     if(code || details){
-      sendMsg = 'Email delivery failed' + (code ? ' (HTTP ' + code + ')' : '') + (details ? ': ' + details : '') + '. Please verify the MailChannels DNS TXT record or email info@civics.au directly.';
+      sendMsg = 'Email delivery failed' + (code ? ' (HTTP ' + code + ')' : '') + (details ? ': ' + details : '') + '. Please try again later or email info@civics.au directly.';
     }
     var msgs = {
       validation: 'Please fill in your name and a valid email address.',
@@ -176,13 +234,25 @@ export const pages = [
   }
   var form = document.getElementById('eoi');
   if(form){
+    var respondentType = form.querySelector('#eoi-respondent-type');
+    var branches = form.querySelectorAll('.eoi-branch');
+    function updateBranches(){
+      var type = respondentType.value;
+      branches.forEach(function(branch){
+        var matches = (branch.getAttribute('data-for') || '').split(' ').indexOf(type) !== -1;
+        branch.hidden = !matches;
+        branch.querySelectorAll('input, select, textarea').forEach(function(field){ field.disabled = !matches; });
+      });
+    }
+    respondentType.addEventListener('change', updateBranches);
+    updateBranches();
     form.addEventListener('submit', function(e){
       var name = form.querySelector('#eoi-name').value.trim();
       var email = form.querySelector('#eoi-email').value.trim();
-      if(!name || !email || !email.includes('@')){
+      if(!name || !email || !email.includes('@') || !respondentType.value){
         e.preventDefault();
         if(alert){
-          alert.textContent = 'Please fill in your name and a valid email address.';
+          alert.textContent = 'Please fill in your name, a valid email address, and the type of interest.';
           alert.style.display = 'block';
           alert.scrollIntoView({behavior:'smooth',block:'nearest'});
         }
