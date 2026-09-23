@@ -19,7 +19,7 @@ for (const page of pages) {
  }
  for (const [, ref] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
   if (/^https?:/.test(ref)) continue;
-  const [local, anchor] = ref.split('#');
+  const [local, anchor] = ref.split('?')[0].split('#');
   const target = path.resolve(root, local || filename);
   assert(target.startsWith(root), `${filename}: invalid local path`);
   await access(target);
