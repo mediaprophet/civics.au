@@ -12,6 +12,7 @@ export const pages = [
     heroTitle: 'Civics, from<br>the ground up.',
     heroIntro: 'A connected set of open proposals: places to land for people in transition, the infrastructure communities need to host them, and digital plumbing that keeps the exchange fair and accountable.',
     heroCtas: [
+      { href: 'plain-terms.html', label: 'Start here — in plain terms' },
       { href: 'walkabout.html', label: 'For participants' },
       { href: 'the-idea.html', label: 'For communities' },
       { href: 'model.html', label: 'Run the numbers', alt: true }
