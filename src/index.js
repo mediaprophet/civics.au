@@ -88,11 +88,17 @@ async function handleEOI(request, env) {
   const secret = env.TURNSTILE_SECRET || TEST_SECRET;
   const ip     = request.headers.get('CF-Connecting-IP') || '';
 
-  const verifyResp = await fetch(TURNSTILE_VERIFY_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secret, response: token, remoteip: ip })
-  });
+  let verifyResp;
+  try {
+    verifyResp = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret, response: token, remoteip: ip })
+    });
+  } catch (err) {
+    console.error('Turnstile verification request failed', err);
+    return redirectTo('/eoi.html?error=verification', request);
+  }
 
   let verifyData;
   try {
@@ -118,7 +124,7 @@ async function handleEOI(request, env) {
   const resendApiKey = env.RESEND_API_KEY;
   if (!resendApiKey) {
     console.error('Missing RESEND_API_KEY binding');
-    return redirectTo('/eoi.html?error=send&details=RESEND_API_KEY+is+not+configured', request);
+    return redirectTo('/eoi.html?error=send', request);
   }
 
   const fromSender = env.RESEND_FROM || 'civics.au <noreply@civics.au>';
@@ -146,12 +152,11 @@ async function handleEOI(request, env) {
     if (!resp.ok) {
       const errBody = await resp.text();
       console.error('Resend error', resp.status, errBody);
-      const detail = encodeURIComponent(errBody.slice(0, 160).replace(/[\r\n\t]/g, ' '));
-      return redirectTo(`/eoi.html?error=send&code=${resp.status}&details=${detail}`, request);
+      return redirectTo('/eoi.html?error=send', request);
     }
   } catch (err) {
     console.error('Resend fetch failed', err);
-    return redirectTo(`/eoi.html?error=send&details=${encodeURIComponent(String(err.message || err))}`, request);
+    return redirectTo('/eoi.html?error=send', request);
   }
 
   return redirectTo('/eoi-sent.html', request);

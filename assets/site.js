@@ -4,8 +4,7 @@ const closeDrops = () => document.querySelectorAll('.nav-drop.open').forEach(d =
   d.querySelector('.nav-drop-btn')?.setAttribute('aria-expanded', 'false');
 });
 document.querySelectorAll('.nav-drop-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
+  btn.addEventListener('click', () => {
     const drop = btn.closest('.nav-drop');
     const willOpen = !drop.classList.contains('open');
     closeDrops();
@@ -14,12 +13,31 @@ document.querySelectorAll('.nav-drop-btn').forEach(btn => {
   });
 });
 document.addEventListener('click', e => { if (!e.target.closest('.nav-drop')) closeDrops(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrops(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const openDrop = document.querySelector('.nav-drop.open');
+  closeDrops();
+  openDrop?.querySelector('.nav-drop-btn')?.focus();
+});
 
 // "On this page" sidebar is a <details> — start it collapsed on narrow screens
 // where it stacks above the article; open by default on desktop.
 const toc = document.querySelector('details.toc:not(.toc--right)');
 if (toc && window.matchMedia('(max-width: 760px)').matches) toc.removeAttribute('open');
+
+const plainSummary = document.querySelector('#in-one-breath .decision-summary ol');
+if (plainSummary) {
+  const step = document.createElement('li');
+  step.innerHTML = '<strong>Leave the place better than you found it.</strong> Take part in <a href="cooperative-projects.html">cooperative projects</a> that recognise useful activities on fair, transparent terms.';
+  plainSummary.appendChild(step);
+}
+
+const specialisedHelp = document.querySelector('#people-are-not-a-stereotype .two-col > div:first-child');
+if (specialisedHelp) {
+  const note = document.createElement('p');
+  note.textContent = 'Human rights are universal, including for people in prison. The hope is that safer options for people with different needs can reduce pressure on specialised beds, places and services, so they are more available to the people who need that level of support.';
+  specialisedHelp.appendChild(note);
+}
 
 // Right-docked collapsible TOC (e.g. on model.html)
 document.querySelectorAll('details.toc--right').forEach(tocRight => {
@@ -48,6 +66,7 @@ if (navToggle) {
     const open = nav.getAttribute('aria-expanded') === 'true';
     nav.setAttribute('aria-expanded', String(!open));
     navToggle.setAttribute('aria-expanded', String(!open));
+    if (open) closeDrops();
   });
   // Close nav when a link is clicked (mobile UX)
   nav.querySelectorAll('.nav-links a').forEach(link => {
@@ -79,22 +98,55 @@ if (budget) {
   update();
 }
 
-// Cooperative Stepper
-const stepper = document.querySelector('[data-coop-stepper]');
-if (stepper) {
+// Cooperative steppers use the same keyboard pattern as tabs.
+document.querySelectorAll('[data-coop-stepper]').forEach((stepper, stepperIndex) => {
   const buttons = [...stepper.querySelectorAll('[data-step-btn]')];
   const panels = [...stepper.querySelectorAll('[data-step-panel]')];
-  buttons.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.setAttribute('aria-selected', 'false'));
-      panels.forEach(p => { p.style.display = 'none'; });
-      btn.setAttribute('aria-selected', 'true');
-      if (panels[index]) {
-        panels[index].style.display = 'block';
-      }
+  if (!buttons.length || buttons.length !== panels.length) return;
+
+  buttons.forEach((button, index) => {
+    const panel = panels[index];
+    const tabId = `coop-step-${stepperIndex}-${index}`;
+    const panelId = `coop-panel-${stepperIndex}-${index}`;
+    button.id = tabId;
+    button.setAttribute('role', 'tab');
+    button.setAttribute('aria-controls', panelId);
+    panel.id = panelId;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', tabId);
+  });
+
+  let activeIndex = Math.max(0, buttons.findIndex(button => button.getAttribute('aria-selected') === 'true'));
+  const selectStep = (index, moveFocus = false) => {
+    activeIndex = index;
+    buttons.forEach((button, buttonIndex) => {
+      const selected = buttonIndex === activeIndex;
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel, panelIndex) => {
+      const selected = panelIndex === activeIndex;
+      panel.hidden = !selected;
+      panel.style.display = selected ? 'block' : 'none';
+    });
+    if (moveFocus) buttons[activeIndex].focus();
+  };
+
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => selectStep(index));
+    button.addEventListener('keydown', event => {
+      let nextIndex = null;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % buttons.length;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + buttons.length) % buttons.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = buttons.length - 1;
+      if (nextIndex === null) return;
+      event.preventDefault();
+      selectStep(nextIndex, true);
     });
   });
-}
+  selectStep(activeIndex);
+});
 
 // Cooperative Payback Simulator
 const sim = document.querySelector('[data-coop-simulator]');
@@ -284,6 +336,44 @@ if (planner) {
   const towBlock = planner.querySelector('[data-tow-fields]');
   const vanBlock = planner.querySelector('[data-van-fields]');
   const result = planner.querySelector('[data-setup-result]');
+
+  // Equipment rows are assembled dynamically, so give every control a name that
+  // carries its row context instead of relying on its visual position.
+  const rowControlNames = {
+    batt: 'Include this battery bank', solar: 'Include this solar panel', mon: 'Include this monitor',
+    mains: 'Include this plug-in source', chg: 'Include this charger', dev: 'Include this device',
+    fit: 'Include this fit-out item', tech: 'Include this technology item',
+    chem: 'Battery chemistry', ah: 'Battery capacity in amp-hours', volt: 'Battery bank voltage', bqty: 'Battery quantity', role: 'Battery bank role',
+    pw: 'Panel wattage', pqty: 'Panel quantity', mtype: 'Monitor type', mqty: 'Monitor quantity',
+    daycost: 'Cost per day', days: 'Days per week', ctype: 'Charger type', crate: 'Charger rating', cvolt: 'Output voltage',
+    w: 'Power draw in watts', hrs: 'Hours per day', dqty: 'Quantity', conn: 'Connection type',
+    aiw: 'Watts under AI compute load', always: 'Runs continuously', week: 'Recurring cost', period: 'Billing period'
+  };
+  const rowContext = row => row.querySelector('.item-name')?.value.trim()
+    || ({ 'batt-row': 'Battery bank', 'solar-row': 'Solar panel', 'mon-row': 'Monitor', 'mains-row': 'Plug-in source', 'chg-row': 'Charger', 'dev-row': 'Device', 'stop-row': 'Travel stop' })[[...row.classList].find(name => name.endsWith('-row'))]
+    || 'Item';
+  const labelPlannerRow = row => {
+    if (!row.classList.contains('item-row')) return;
+    const context = rowContext(row);
+    row.querySelectorAll('input, select, button').forEach(control => {
+      if (control.type === 'hidden' || control.hasAttribute('aria-label')) return;
+      if (control.classList.contains('item-del')) control.setAttribute('aria-label', `Remove ${context}`);
+      else if (control.type === 'checkbox') control.setAttribute('aria-label', rowControlNames[Object.keys(rowControlNames).find(key => control.hasAttribute(`data-${key}`))] || `Include ${context}`);
+      else if (control.hasAttribute('data-cost')) control.setAttribute('aria-label', `${context} cost`);
+      else if (control.hasAttribute('data-kg')) control.setAttribute('aria-label', `${context} weight in kilograms`);
+      else {
+        const key = Object.keys(rowControlNames).find(name => control.hasAttribute(`data-${name}`));
+        if (key) control.setAttribute('aria-label', `${context} — ${rowControlNames[key]}`);
+      }
+    });
+  };
+  planner.querySelectorAll('.item-row').forEach(labelPlannerRow);
+  new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.matches?.('.item-row')) labelPlannerRow(node);
+      node.querySelectorAll?.('.item-row').forEach(labelPlannerRow);
+    }
+  }))).observe(planner, { childList: true, subtree: true });
 
   const applyPreset = type => {
     const p = presets[type];
@@ -598,9 +688,11 @@ if (planner) {
       cgWeekly = weekly - siteFee + cgFee;
       const cgAvoided = (field('cgNoSolar')?.checked ? solarCost : 0) + (field('cgNoBatt')?.checked ? battCost : 0) + (field('cgNoChg')?.checked ? gearCost : 0);
       cgUpfront = upfront - cgAvoided;
-      const wkDelta = weekly - cgWeekly;
+      const comparisonWeekly = onGrounds ? woWeekly : weekly;
+      const wkDelta = comparisonWeekly - cgWeekly;
+      const comparisonLabel = onGrounds ? 'the commercial-site benchmark' : 'the current site choice';
       const cgStay = num('cgStay') || 90;
-      powerLines.push(`Community Grounds scenario: a powered site at ${money.format(cgFee)}/wk${field('cgCard')?.checked ? ' (concession rate, proven by the digital concession card)' : ''}, default stay cap ~${cgStay} days (vs 7–28-day caps common today) → weekly cost ${money.format(cgWeekly)} vs ${money.format(weekly)} today — ${wkDelta >= 0 ? 'saves' : 'adds'} ${money.format(Math.abs(wkDelta))}/wk ≈ ${money.format(Math.abs(wkDelta) * 52)}/yr${cgAvoided > 0 ? `; and ${money.format(cgAvoided)} of owner-purchased energy gear isn't needed (upfront ${money.format(cgUpfront)} vs ${money.format(upfront)})` : ''}.`);
+      powerLines.push(`Community Grounds scenario: a powered site at ${money.format(cgFee)}/wk${field('cgCard')?.checked ? ' (concession rate, proven by the digital concession card)' : ''}, default stay cap ~${cgStay} days (vs 7–28-day caps common today) → weekly cost ${money.format(cgWeekly)} vs ${money.format(comparisonWeekly)} for ${comparisonLabel} — ${wkDelta >= 0 ? 'saves' : 'adds'} ${money.format(Math.abs(wkDelta))}/wk ≈ ${money.format(Math.abs(wkDelta) * 52)}/yr${cgAvoided > 0 ? `; and ${money.format(cgAvoided)} of owner-purchased energy gear isn't needed (upfront ${money.format(cgUpfront)} vs ${money.format(upfront)})` : ''}.`);
     }
 
     result.innerHTML = `
@@ -746,7 +838,10 @@ if (planner) {
   });
 
   planner.querySelectorAll('input[name="setup-type"]').forEach(r => r.addEventListener('change', () => { applyPreset(r.value); recalc(); }));
-  planner.addEventListener('input', recalc);
+  planner.addEventListener('input', event => {
+    if (event.target.matches('.item-name')) labelPlannerRow(event.target.closest('.item-row'));
+    recalc();
+  });
   planner.addEventListener('change', recalc);
   recalc();
 
@@ -923,5 +1018,3 @@ if (planner) {
   }
 
 }
-
-

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">The pathway from stability to a next step</title>
+  <desc id="desc">Four connected steps: a secure place to land, breathing room, contribution and skills, then a next step into work, a home or a venture. The benefits return to the community ground.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f2e8}.line{stroke:#799367;stroke-width:8;stroke-linecap:round;fill:none}.box{fill:#fffdf8;stroke:#294c3a;stroke-width:3}.n{fill:#d56a45}.num{font:700 24px Arial,sans-serif;fill:#fff}.head{font:700 28px Arial,sans-serif;fill:#18382a}.copy{font:20px Arial,sans-serif;fill:#385348}.small{font:18px Arial,sans-serif;fill:#385348}.label{font:700 22px Arial,sans-serif;fill:#18382a}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 Z" fill="#799367"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="620" rx="24"/>
+  <text x="600" y="66" text-anchor="middle" class="head" font-size="34">A practical pathway, one step at a time</text>
+  <text x="600" y="100" text-anchor="middle" class="copy">The proposal starts with a stable base, then creates room for choices.</text>
+  <path class="line" d="M285 288 H330 M560 288 H605 M835 288 H880" marker-end="url(#arrow)"/>
+  <g transform="translate(55 170)"><rect class="box" width="230" height="238" rx="18"/><circle class="n" cx="34" cy="34" r="22"/><text class="num" x="34" y="42" text-anchor="middle">1</text><text class="head" x="24" y="88">A place to land</text><text class="copy" x="24" y="124">A safe, legal place</text><text class="copy" x="24" y="151">to stay with power,</text><text class="copy" x="24" y="178">water and support.</text></g>
+  <g transform="translate(330 170)"><rect class="box" width="230" height="238" rx="18"/><circle class="n" cx="34" cy="34" r="22"/><text class="num" x="34" y="42" text-anchor="middle">2</text><text class="head" x="24" y="88">Breathing room</text><text class="copy" x="24" y="124">Lower immediate costs</text><text class="copy" x="24" y="151">make it easier to plan,</text><text class="copy" x="24" y="178">recover and decide.</text></g>
+  <g transform="translate(605 170)"><rect class="box" width="230" height="238" rx="18"/><circle class="n" cx="34" cy="34" r="22"/><text class="num" x="34" y="42" text-anchor="middle">3</text><text class="head" x="24" y="88">Skills and contribution</text><text class="copy" x="24" y="124">People can learn, help</text><text class="copy" x="24" y="151">and build a record of</text><text class="copy" x="24" y="178">what they have done.</text></g>
+  <g transform="translate(880 170)"><rect class="box" width="265" height="238" rx="18"/><circle class="n" cx="34" cy="34" r="22"/><text class="num" x="34" y="42" text-anchor="middle">4</text><text class="head" x="24" y="88">The next step</text><text class="copy" x="24" y="124">A job, a venture, a home</text><text class="copy" x="24" y="151">or another community —</text><text class="copy" x="24" y="178">on better terms.</text></g>
+  <path class="line" d="M1015 438 C1015 530,175 530,175 438" marker-end="url(#arrow)"/>
+  <text x="600" y="568" text-anchor="middle" class="label">People who become secure can strengthen the community in return.</text>
+</svg>

@@ -469,6 +469,36 @@ const numIn = id => {
 };
 const chk = id => { const el = document.getElementById(id); return !!(el && el.checked); };
 const r1 = v => Math.round(v * 10) / 10;
+const SOLAR_LIMITS = [
+  ['s-array', 'Solar array capacity', 0, Infinity],
+  ['s-psh-summer', 'Summer peak sun hours', 0, 24],
+  ['s-psh-winter', 'Winter peak sun hours', 0, 24],
+  ['s-derate', 'System derate', 0, 100],
+  ['s-batt', 'Battery usable capacity', 0, Infinity],
+  ['s-rte', 'Round-trip efficiency', 0.000001, 100],
+  ['s-maxdis', 'Maximum discharge power', 0, Infinity],
+  ['s-day', 'Daytime load', 0, Infinity],
+  ['s-eve', 'Evening load', 0, Infinity],
+  ['s-night', 'Overnight load', 0, Infinity],
+];
+
+function solarInputErrors() {
+  const errors = [];
+  for (const [id, label, min, max] of SOLAR_LIMITS) {
+    const el = document.getElementById(id);
+    const raw = el?.value.trim();
+    const value = raw ? Number(raw) : NaN;
+    const valid = Number.isFinite(value) && value >= min && value <= max;
+    el?.setAttribute('aria-invalid', String(!valid));
+    if (!valid) {
+      const range = max === Infinity
+        ? (min === 0.000001 ? 'be greater than 0' : `be at least ${min}`)
+        : `be between ${min} and ${max}`;
+      errors.push(`${label} must ${range}.`);
+    }
+  }
+  return errors;
+}
 
 function solarCalc() {
   const kwp = numIn('s-array'), derate = numIn('s-derate') / 100;
@@ -509,6 +539,15 @@ function solarCalc() {
 }
 
 function renderSolar() {
+  const errors = solarInputErrors();
+  const addButton = $('#solar-add-report');
+  if (errors.length) {
+    lastSolar = null;
+    $('#solar-results tbody').innerHTML = ['Summer', 'Winter'].map(season => `<tr><td>${season}</td>${'<td>—</td>'.repeat(7)}</tr>`).join('');
+    $('#solar-note').textContent = `Fix the highlighted input before using these results. ${errors[0]}`;
+    addButton.disabled = true;
+    return;
+  }
   lastSolar = solarCalc();
   const rows = [['Summer', lastSolar.summer], ['Winter', lastSolar.winter]].map(([s, r]) =>
     `<tr><td>${s}</td><td>${r1(r.gen).toLocaleString('en-AU')}</td><td>${r1(r.direct)}</td><td>${r1(r.charged)}</td><td>${r1(r.delivered)}</td><td>${r1(r.unmet)}</td><td>${r1(r.exportable)}</td><td>${fmtPct(r.coverage)}</td></tr>`).join('');
@@ -517,6 +556,39 @@ function renderSolar() {
   if (lastSolar.disLimited) notes.push('Evening/overnight average load exceeds max discharge power — battery may not cover peak evening demand even when charged.');
   notes.push('Figures are energy balances in kWh/day, not hour-by-hour dispatch. "To battery" is pre-efficiency charge energy; "From battery" is delivered after round-trip losses.');
   $('#solar-note').textContent = notes.join(' ');
+  addButton.disabled = false;
+}
+
+const WATER_LIMITS = [
+  ['w-flow', 'Pumping volume', 0, Infinity, () => chk('w-pump-on')],
+  ['w-head', 'Total dynamic head', 0, Infinity, () => chk('w-pump-on')],
+  ['w-eff', 'Pump and motor efficiency', 0.000001, 100, () => chk('w-pump-on')],
+  ['w-ro-flow', 'RO plant output', 0, Infinity, () => chk('w-ro-on')],
+  ['w-heat-litres', 'Hot water demand', 0, Infinity, () => chk('w-heat-on')],
+  ['w-inlet', 'Inlet temperature', -50, 150, () => chk('w-heat-on')],
+  ['w-outlet', 'Outlet temperature', -50, 150, () => chk('w-heat-on')],
+  ['w-shw-cov', 'Solar hot-water share', 0, 100, () => chk('w-heat-on') && chk('w-shw')],
+  ['w-sand-cap', 'Sand battery capacity', 0, Infinity, () => chk('w-heat-on') && chk('w-sand')],
+  ['w-sand-eff', 'Sand battery round-trip efficiency', 0.000001, 100, () => chk('w-heat-on') && chk('w-sand')],
+];
+
+function waterInputErrors() {
+  const errors = [];
+  for (const [id, label, min, max, required] of WATER_LIMITS) {
+    const el = document.getElementById(id);
+    const raw = el?.value.trim();
+    const value = raw ? Number(raw) : NaN;
+    const active = required();
+    const valid = !active || (Number.isFinite(value) && value >= min && value <= max);
+    el?.setAttribute('aria-invalid', String(!valid));
+    if (!valid) {
+      const range = max === Infinity
+        ? (min === 0.000001 ? 'be greater than 0' : `be at least ${min}`)
+        : `be between ${min} and ${max}`;
+      errors.push(`${label} must ${range}.`);
+    }
+  }
+  return errors;
 }
 
 function waterCalc() {
@@ -557,6 +629,15 @@ function waterCalc() {
 }
 
 function renderWater() {
+  const errors = waterInputErrors();
+  const addButton = $('#water-add-report');
+  if (errors.length) {
+    lastWater = null;
+    $('#water-results tbody').innerHTML = `<tr><td colspan="4">Fix the highlighted input before using these results.</td></tr>`;
+    $('#water-note').textContent = errors[0];
+    addButton.disabled = true;
+    return;
+  }
   lastWater = waterCalc();
   $('#water-results tbody').innerHTML = lastWater.rows.map(([name, basis, kwh, type]) =>
     `<tr><td>${esc(name)}</td><td class="small">${esc(basis)}</td><td>${r1(kwh)}</td><td class="small">${type}</td></tr>`).join('') +
@@ -569,6 +650,7 @@ function renderWater() {
     notes.push(`Versus solar model exportable surplus: summer ${r1(avail)} kWh/day (${fmtPct(Math.min(1, avail / Math.max(1e-9, lastWater.totalElectric)))} of demand), winter ${r1(availW)} kWh/day (${fmtPct(Math.min(1, availW / Math.max(1e-9, lastWater.totalElectric)))}).`);
   }
   $('#water-note').textContent = notes.join(' ');
+  addButton.disabled = false;
 }
 
 // ---------- accumulated report ----------
@@ -611,6 +693,7 @@ async function addToReport(type) {
     };
   } else if (type === 'solar') {
     const c = lastSolar;
+    if (!c) { updateStatus('Fix the solar and battery inputs before adding this run to the report.'); return; }
     entry = {
       type: 'Solar & battery', name: `Solar & battery — ${scopeLabel || 'site'}`, ts,
       inputs: c.inputs,
@@ -623,6 +706,7 @@ async function addToReport(type) {
     };
   } else if (type === 'water') {
     const c = lastWater;
+    if (!c) { updateStatus('Fix the water and thermal inputs before adding this run to the report.'); return; }
     const inputs = {};
     if (chk('w-pump-on')) Object.assign(inputs, { 'Pumping': `${numIn('w-flow')} kL/day · ${numIn('w-head')} m · ${numIn('w-eff')}% eff` });
     if (chk('w-ro-on')) Object.assign(inputs, { 'RO plant': `${numIn('w-ro-flow')} kL/day · ${document.getElementById('w-ro-source').selectedOptions[0].text}` });
@@ -712,11 +796,30 @@ async function boot() {
   $('#model-print').addEventListener('click', async () => { lastHash = await contentHash(JSON.stringify(snapshot())); refreshPrintReport(); window.print(); });
 
   // model-type tabs
-  document.querySelectorAll('[data-mtab]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('[data-mtab]').forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
-    document.querySelectorAll('[data-mtab-panel]').forEach(p => { p.hidden = p.dataset.mtabPanel !== b.dataset.mtab; });
-    if (b.dataset.mtab === 'report') renderReportList();
-  }));
+  const modelTabs = [...document.querySelectorAll('[data-mtab]')];
+  const selectModelTab = (tab, focus = false) => {
+    modelTabs.forEach(candidate => {
+      const selected = candidate === tab;
+      candidate.setAttribute('aria-selected', String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+    });
+    document.querySelectorAll('[data-mtab-panel]').forEach(panel => { panel.hidden = panel.dataset.mtabPanel !== tab.dataset.mtab; });
+    if (tab.dataset.mtab === 'report') renderReportList();
+    if (focus) tab.focus();
+  };
+  modelTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectModelTab(tab));
+    tab.addEventListener('keydown', event => {
+      let nextIndex;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % modelTabs.length;
+      else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + modelTabs.length) % modelTabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = modelTabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectModelTab(modelTabs[nextIndex], true);
+    });
+  });
 
   // solar & water calculators recompute on any input
   const solarPanel = document.querySelector('[data-mtab-panel="solar"]');

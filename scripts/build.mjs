@@ -123,13 +123,14 @@ const renderNav = current => {
     return `<a href="${p.slug}.html"${p.slug === current ? ' aria-current="page"' : ''}><span class="num">${String(i).padStart(2, '0')}</span>${escape(p.nav)}</a>`;
   };
   const items = [];
-  let group, buf = [];
+  let group, buf = [], groupIndex = 0;
   const flush = () => {
     if (!buf.length) return;
     if (!group) items.push(...buf.map(link));
     else {
       const active = buf.some(p => p.slug === current);
-      items.push(`<div class="nav-drop"><button class="nav-drop-btn" type="button" aria-expanded="false"${active ? ' data-current' : ''}>${escape(group)}<svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><div class="nav-drop-menu">${buf.map(link).join('')}</div></div>`);
+      const menuId = `nav-group-${groupIndex++}`;
+      items.push(`<div class="nav-drop"><button class="nav-drop-btn" type="button" aria-expanded="false" aria-controls="${menuId}"${active ? ' data-current' : ''}>${escape(group)}<svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><div class="nav-drop-menu" id="${menuId}">${buf.map(link).join('')}</div></div>`);
     }
     buf = [];
   };
@@ -175,7 +176,7 @@ for (const page of pages) {
 
 // Generate 404 page
 const notFoundNavHtml = renderNav('404');
-const notFoundBody = `<header class="page-head"><p class="eyebrow">404 / Not Found</p><h1>Page not found</h1><p class="intro">The page you were looking for doesn't exist or has moved.</p></header><div class="reading"><article class="article"><p>You can return to the main overview or explore one of the concept sections above.</p><p style="margin-top:2rem"><a class="button" href="index.html">Return to the overview <span aria-hidden="true">↗</span></a></p></article></div>`;
+const notFoundBody = `<header class="page-head"><p class="eyebrow">404 / Not Found</p><h1>Page not found</h1><p class="intro">The page you were looking for doesn't exist or has moved.</p></header><div class="reading reading--full"><article class="article article--full utility-page"><p>You can return to the main overview or explore one of the concept sections above.</p><p style="margin-top:2rem"><a class="button" href="index.html">Return to the overview <span aria-hidden="true">↗</span></a></p></article></div>`;
 const notFoundHead = renderHead({ title: 'Page not found', description: 'The page you requested could not be found.', slug: '404', pageType: 'WebPage' });
 const notFoundHtml = `<!doctype html>
 <html lang="en-AU"><head prefix="og: https://ogp.me/ns#">${notFoundHead.replace('<head>', '').replace('</head>', '')}</head><body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="masthead">${brand}<span class="mast-note">Ideas for a more resilient society<br>Australia → the world</span></header><nav class="nav" aria-label="Main navigation">${notFoundNavHtml}</nav><main id="main">${notFoundBody}</main><footer class="footer"><span>civics.au · A civics ecosystem · Concept collection · September 2026</span><div><a href="review.html#sources">Sources & scope</a><a href="review.html#pilot-questions">Questions for a pilot</a></div></footer></div></body></html>\n`;
@@ -185,7 +186,7 @@ console.log('Built 404.html');
 
 // Generate EOI success page (eoi-sent.html)
 const sentNavHtml = renderNav('eoi-sent');
-const sentBody = `<header class="page-head"><p class="eyebrow">Expression of interest</p><h1>Thank you — we'll be in touch.</h1><p class="intro">Your expression of interest has been received and forwarded to the civics.au team at info@civics.au.</p></header><div class="reading"><article class="article"><div class="eoi-success"><h3>What happens next?</h3><p>A member of the team will review your submission and respond by email within a few business days. If you have an urgent enquiry, you can also reach us directly at <a href="mailto:info@civics.au">info@civics.au</a>.</p></div><p style="margin-top:2.5rem"><a class="button" href="index.html">Return to the overview <span aria-hidden="true">↗</span></a></p></article></div>`;
+const sentBody = `<header class="page-head"><p class="eyebrow">Expression of interest</p><h1>Thank you — we'll be in touch.</h1><p class="intro">Your expression of interest has been received and forwarded to the civics.au team at info@civics.au.</p></header><div class="reading reading--full"><article class="article article--full utility-page"><div class="eoi-success"><h2>What happens next?</h2><p>A member of the team will review your submission and respond by email within a few business days. If you have an urgent enquiry, you can also reach us directly at <a href="mailto:info@civics.au">info@civics.au</a>.</p></div><p style="margin-top:2.5rem"><a class="button" href="index.html">Return to the overview <span aria-hidden="true">↗</span></a></p></article></div>`;
 const sentHead = renderHead({ title: 'Expression of interest received', description: 'Your expression of interest has been received by the civics.au team.', slug: 'eoi-sent', pageType: 'WebPage' });
 const sentHtml = `<!doctype html>
 <html lang="en-AU"><head prefix="og: https://ogp.me/ns#">${sentHead.replace('<head>', '').replace('</head>', '')}</head><body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="masthead">${brand}<span class="mast-note">Ideas for a more resilient society<br>Australia → the world</span></header><nav class="nav" aria-label="Main navigation">${sentNavHtml}</nav><main id="main">${sentBody}</main><footer class="footer"><span>civics.au · A civics ecosystem · Concept collection · September 2026</span><div><a href="review.html#sources">Sources & scope</a><a href="review.html#pilot-questions">Questions for a pilot</a></div></footer></div></body></html>\n`;
