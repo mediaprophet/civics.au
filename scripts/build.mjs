@@ -148,7 +148,18 @@ for (const page of pages) {
   const nextLink = next ? `<a class="next-page" href="${next.slug}.html"><div><small>${next.slug === 'index' ? 'Return to the overview' : 'Continue exploring'}</small><strong>${escape(next.nav)}</strong></div><span aria-hidden="true">↗</span></a>` : '';
   const heroFigure = `<figure class="ground-figure"><div class="figure-top"><span>The shared ground</span><span>Concept / 01</span></div><img src="assets/grounds.svg" alt="Concept diagram: a shared oval surrounded by solar sheds, a community hub, battery, amenities and homes on wheels, connected to the town." width="560" height="450" style="width:100%;height:auto;display:block"><figcaption>One place. Several purposes. An illustration, not a site design.</figcaption></figure>`;
   const heroCtas = page.heroCtas || [{ href: 'walkabout.html', label: 'For participants: the Walkabout Strategy' }, { href: 'community-grounds.html', label: 'For communities: the grounds', alt: true }];
-  const hero = `<div class="hero"><div><p class="eyebrow">${escape(page.heroEyebrow || 'Community grounds / An Australian proposal')}</p><h1>${page.heroTitle || 'A place to land.<br>Room to move.'}</h1><p class="intro">${escape(page.heroIntro || 'Shared places, homes on wheels and civics infrastructure that give people more room to rebuild their lives—and communities more capacity to thrive.')}</p><div class="hero-ctas">${heroCtas.map(c => `<a class="button${c.alt ? ' alt' : ''}" href="${c.href}">${escape(c.label)} <span aria-hidden="true">↗</span></a>`).join('')}</div>${page.heroNote || ''}<span class="draft">Concept notes · Initial draft for discussion</span></div>${page.heroFigure === false ? '' : heroFigure}</div>`;
+  const heroEyebrow = `<p class="eyebrow">${escape(page.heroEyebrow || 'Community grounds / An Australian proposal')}</p>`;
+  const heroTitle = `<h1>${page.heroTitle || 'A place to land.<br>Room to move.'}</h1>`;
+  const heroIntro = `<p class="intro">${escape(page.heroIntro || 'Shared places, homes on wheels and civics infrastructure that give people more room to rebuild their lives—and communities more capacity to thrive.')}</p>`;
+  const heroCtasHtml = `<div class="hero-ctas">${heroCtas.map(c => `<a class="button${c.alt ? ' alt' : ''}" href="${c.href}">${escape(c.label)} <span aria-hidden="true">↗</span></a>`).join('')}</div>`;
+  const heroDraft = `<span class="draft">Concept notes · Initial draft for discussion</span>`;
+  const heroNote = page.heroNote || '';
+
+  const heroContent = page.slug === 'index'
+    ? `${heroEyebrow}${heroNote}${heroDraft}${heroTitle}${heroIntro}${heroCtasHtml}`
+    : `${heroEyebrow}${heroTitle}${heroIntro}${heroCtasHtml}${heroNote}${heroDraft}`;
+
+  const hero = `<div class="hero"><div>${heroContent}</div>${page.heroFigure === false ? '' : heroFigure}</div>`;
   let body;
   if (page.hero) {
     body = hero + page.sections.map(s => `<div id="${s.id}">${s.html}</div>`).join('');
