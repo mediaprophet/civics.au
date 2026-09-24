@@ -21,7 +21,7 @@ function renderHead({ title, description, slug, pageType = 'WebPage', map = fals
   const safeTitle = escape(title);
   const safeDesc = escape(description);
   const pageUrl = `https://civics.au/${slug}.html`;
-  const groundsImg = 'https://civics.au/assets/grounds.svg';
+  const groundsImg = 'https://civics.au/assets/civics-au-cg.jpg';
 
   const schema = {
     '@context': 'https://schema.org',
@@ -51,6 +51,7 @@ function renderHead({ title, description, slug, pageType = 'WebPage', map = fals
         'url': pageUrl,
         'name': title,
         'description': description,
+        'image': { '@type': 'ImageObject', 'url': groundsImg },
         'isPartOf': { '@id': 'https://civics.au/#website' },
         'inLanguage': 'en-AU',
         'about': [
@@ -93,7 +94,7 @@ function renderHead({ title, description, slug, pageType = 'WebPage', map = fals
 <meta property="og:description" content="${safeDesc}">
 <meta property="og:url" content="${pageUrl}">
 <meta property="og:image" content="${groundsImg}">
-<meta property="og:image:alt" content="civics.au — Community grounds concept illustration">
+<meta property="og:image:alt" content="civics.au — community grounds concept artwork">
 <meta property="og:locale" content="en_AU">
 
 <!-- Twitter Cards -->
