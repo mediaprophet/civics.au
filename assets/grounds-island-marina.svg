@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 450" role="img" aria-labelledby="title desc">
+  <title id="title">Island or shore community ground with marina</title>
+  <desc id="desc">A small island or shore community ground connected to a marina, with solar buildings, a shared hall, workshop, gardens and places for homes on wheels above the waterfront.</desc>
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9fc8cf"/><stop offset="1" stop-color="#74aeb9"/></linearGradient>
+    <pattern id="solar" width="16" height="13" patternUnits="userSpaceOnUse" patternTransform="skewX(-15)"><rect x="1" y="1" width="13" height="10" fill="#42665d" stroke="#a8c2ab" stroke-width=".6"/></pattern>
+  </defs>
+  <rect width="560" height="450" fill="url(#water)"/>
+  <path d="M0 68C100 43 132 78 213 57S372 43 560 78M0 140C99 115 163 151 258 123S413 115 560 146M0 384C102 350 181 399 293 365S460 353 560 381" fill="none" stroke="#dceef0" stroke-width="3" opacity=".8"/>
+  <path d="M59 79C139 40 261 53 339 83c74 28 145 43 171 127 19 64-30 113-89 132-90 30-174-1-253 13-65 11-128-25-133-90-5-59-21-123 24-162Z" fill="#d5e2c3" stroke="#8fa884" stroke-width="2"/>
+  <path d="M86 115C151 85 260 91 332 112c66 20 118 37 141 89" fill="none" stroke="#f0f2df" stroke-width="13"/>
+  <path d="M105 111L248 94 263 158 119 175Z" fill="#f9f3df" stroke="#637f60" stroke-width="2"/><path d="M105 111l24-27 142-16-23 26Z" fill="#244f45"/><path d="M131 87l132-15-19 21-132 15Z" fill="url(#solar)"/>
+  <text x="183" y="139" text-anchor="middle" font-family="Arial" font-size="12" fill="#315846">SHARED HALL</text><text x="183" y="156" text-anchor="middle" font-family="Arial" font-size="10" fill="#536e56">workshop · meals · meetings</text>
+  <path d="M307 113l92-12 13 42-93 13Z" fill="#4b705f"/><path d="M317 117l72-10 9 29-73 10Z" fill="url(#solar)"/><text x="357" y="174" text-anchor="middle" font-family="Arial" font-size="10" fill="#315846">SOLAR SHADE</text>
+  <g fill="#fbf6e8" stroke="#607b5d" stroke-width="1.5"><path d="M120 222l42-10 27 18v25l-43 10-26-18Z"/><path d="M191 230l42-10 27 18v25l-43 10-26-18Z"/><path d="M260 221l42-10 27 18v25l-43 10-26-18Z"/></g>
+  <g fill="#6f8e68"><circle cx="90" cy="206" r="15"/><circle cx="92" cy="257" r="13"/><circle cx="438" cy="219" r="15"/><circle cx="412" cy="243" r="13"/></g>
+  <path d="M392 258L516 307" stroke="#ba9060" stroke-width="13"/><path d="M386 289L502 337" stroke="#ba9060" stroke-width="11"/><path d="M413 268l82 33m-74-3 76 31" stroke="#f5e8c9" stroke-width="2"/>
+  <g fill="#f6f3e3" stroke="#38626a" stroke-width="2"><path d="M429 252q18-17 38 0v17h-38Z"/><path d="M461 266q19-16 39 0v17h-39Z"/><path d="M443 294q19-16 39 0v17h-39Z"/><path d="M478 309q18-16 37 0v16h-37Z"/></g>
+  <g fill="none" stroke="#d06348" stroke-width="2"><path d="M436 251l12-25 12 25"/><path d="M469 265l12-25 12 25"/><path d="M451 293l12-25 12 25"/><path d="M485 308l11-23 11 23"/></g>
+  <path d="M354 196v-39m0 0l-16 20m16-20 16 20" stroke="#3f6d70" stroke-width="3" fill="none"/><circle cx="354" cy="157" r="4" fill="#3f6d70"/><text x="354" y="215" text-anchor="middle" font-family="Arial" font-size="9" fill="#315846">COMMS</text>
+  <g font-family="Arial" font-size="11" fill="#224a41" stroke="#5d8780"><path d="M128 84V42H29" fill="none"/><text x="27" y="33" stroke="none">01 / Shared shore facility</text><path d="M403 130V76H528" fill="none"/><text x="420" y="67" stroke="none">02 / Solar + market shade</text><path d="M397 275h114v-25" fill="none"/><text x="425" y="240" stroke="none">03 / Small marina</text><path d="M261 243v91H99" fill="none"/><text x="25" y="347" stroke="none">04 / Homes on higher ground</text></g>
+  <text x="280" y="426" text-anchor="middle" font-family="Arial" font-size="10" fill="#e8f3ef" letter-spacing="1.15">SHORE OR ISLAND SITES NEED CAREFUL WATER, ACCESS AND ENVIRONMENTAL DESIGN</text>
+</svg>

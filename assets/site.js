@@ -32,6 +32,86 @@ if (plainSummary) {
   plainSummary.appendChild(step);
 }
 
+const groundFigure = document.querySelector('.ground-figure');
+const groundImage = groundFigure?.querySelector('img');
+if (groundFigure && groundImage) {
+  const groundScenarios = [
+    {
+      src: 'assets/grounds.svg',
+      label: 'Regional showground',
+      alt: 'Concept diagram of a shared oval surrounded by solar sheds, a community hub, battery, amenities and homes on wheels, connected to the town.',
+      caption: 'Regional showground: shared infrastructure can grow around an existing oval and amenities block.'
+    },
+    {
+      src: 'assets/grounds-town-edge.svg',
+      label: 'Town-edge retrofit',
+      alt: 'Concept diagram of an existing town-edge depot and car park adapted with solar canopies, a shared workshop, gardens, amenities and bays for homes on wheels.',
+      caption: 'Town-edge retrofit: a depot, car park or underused council site can be adapted in stages.'
+    },
+    {
+      src: 'assets/grounds-riverside.svg',
+      label: 'Riverside or harbour',
+      alt: 'Concept diagram of a waterside community ground with a small boat landing, a shared hall, solar shade, gardens and mobile homes on higher ground.',
+      caption: 'Riverside or harbour: water access can be part of the picture where it is safe, legal and suitable.'
+    },
+    {
+      src: 'assets/grounds-island-marina.svg',
+      label: 'Island or shore marina',
+      alt: 'Concept diagram of an island or shoreline community ground with a small marina, solar buildings, a shared hall, workshop, gardens and places for homes on wheels above the waterfront.',
+      caption: 'Island or shore marina: a water-connected ground needs separate access, safety and environmental design.'
+    },
+    {
+      src: 'assets/grounds-resilience.svg',
+      label: 'Resilience hub',
+      alt: 'Concept diagram of a community hall and sports ground prepared as a resilience hub with solar, battery storage, communications, water and temporary accommodation.',
+      caption: 'Resilience hub: a familiar community facility can support ordinary life and help during disruption.'
+    }
+  ];
+  const caption = groundFigure.querySelector('figcaption');
+  const counter = groundFigure.querySelector('.figure-top span:last-child');
+  const controls = document.createElement('div');
+  controls.className = 'ground-rotator-controls';
+  controls.innerHTML = '<button type="button" class="ground-rotator-button" data-ground-prev aria-label="Show previous possible setting">←</button><span class="ground-rotator-status" aria-live="off"></span><button type="button" class="ground-rotator-button" data-ground-next aria-label="Show next possible setting">→</button>';
+  groundFigure.appendChild(controls);
+  const spaceKey = document.createElement('div');
+  spaceKey.className = 'ground-space-key';
+  spaceKey.innerHTML = '<p>Every suitable layout needs room for:</p><div><span><strong>Community hub</strong><small>meetings, meals, services and connection</small></span><span><strong>Maker space</strong><small>learning, shared tools and lighter projects</small></span><span><strong>Workshop / yard</strong><small>repairs, storage, materials and practical work</small></span></div>';
+  groundFigure.appendChild(spaceKey);
+  const status = controls.querySelector('.ground-rotator-status');
+  let currentGround = 0;
+  let timer = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const showGround = (next, announce = false) => {
+    currentGround = (next + groundScenarios.length) % groundScenarios.length;
+    const scenario = groundScenarios[currentGround];
+    groundImage.classList.add('is-swapping');
+    window.setTimeout(() => {
+      groundImage.src = scenario.src;
+      groundImage.alt = scenario.alt;
+      counter.textContent = `Concept / ${String(currentGround + 1).padStart(2, '0')} · ${scenario.label}`;
+      caption.textContent = scenario.caption;
+      status.setAttribute('aria-live', announce ? 'polite' : 'off');
+      status.textContent = `${scenario.label} — ${currentGround + 1} of ${groundScenarios.length}`;
+      groundImage.classList.remove('is-swapping');
+    }, reducedMotion ? 0 : 160);
+  };
+  const stopRotation = () => { if (timer) { window.clearInterval(timer); timer = null; } };
+  const startRotation = () => {
+    stopRotation();
+    if (!reducedMotion) timer = window.setInterval(() => showGround(currentGround + 1), 8500);
+  };
+  controls.querySelector('[data-ground-prev]').addEventListener('click', () => { showGround(currentGround - 1, true); startRotation(); });
+  controls.querySelector('[data-ground-next]').addEventListener('click', () => { showGround(currentGround + 1, true); startRotation(); });
+  groundFigure.addEventListener('pointerenter', stopRotation);
+  groundFigure.addEventListener('pointerleave', startRotation);
+  groundFigure.addEventListener('focusin', stopRotation);
+  groundFigure.addEventListener('focusout', startRotation);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopRotation(); else startRotation(); });
+  showGround(0);
+  startRotation();
+}
+
 const specialisedHelp = document.querySelector('#people-are-not-a-stereotype .two-col > div:first-child');
 if (specialisedHelp) {
   const note = document.createElement('p');

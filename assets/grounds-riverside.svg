@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 450" role="img" aria-labelledby="title desc">
+  <title id="title">Riverside or harbour community ground</title>
+  <desc id="desc">A waterside community ground with a small boat landing, a shared hall, solar shade, gardens and mobile homes on higher ground.</desc>
+  <defs><pattern id="solar" width="16" height="13" patternUnits="userSpaceOnUse" patternTransform="skewX(-15)"><rect x="1" y="1" width="13" height="10" fill="#42665d" stroke="#a8c2ab" stroke-width=".6"/></pattern></defs>
+  <rect width="560" height="450" fill="#e8eee5"/><path d="M0 296C83 265 148 328 228 295S371 263 560 301V450H0Z" fill="#a8cbd0"/><path d="M0 323C84 292 155 350 234 318S399 291 560 330" fill="none" stroke="#e7f1ed" stroke-width="4"/>
+  <path d="M0 44L560 0V309C442 281 347 299 254 322S87 292 0 327Z" fill="#d7e2c9"/><path d="M36 72L510 33 519 234 41 278Z" fill="#c4d5b5" stroke="#8da782" stroke-width="1.5"/>
+  <path d="M82 93L228 80 247 152 99 168Z" fill="#f7f2df" stroke="#718b70" stroke-width="2"/><path d="M82 93l24-27 145-13-23 27Z" fill="#244f45"/><path d="M108 69l136-12-19 22-135 12Z" fill="url(#solar)"/>
+  <text x="164" y="124" text-anchor="middle" font-family="Arial" font-size="12" fill="#315846">COMMUNITY HALL</text><text x="164" y="142" text-anchor="middle" font-family="Arial" font-size="10" fill="#536e56">workshop · meals · meetings</text>
+  <path d="M302 94L453 81 466 125 314 140Z" fill="#486f5f"/><path d="M318 99L442 88 452 119 327 131Z" fill="url(#solar)"/><text x="385" y="159" text-anchor="middle" font-family="Arial" font-size="10" fill="#315846">SOLAR SHADE + MARKET</text>
+  <g fill="#fbf6e8" stroke="#607b5d" stroke-width="1.5"><path d="M106 202l44-9 28 19v27l-45 9-27-18Z"/><path d="M183 220l44-9 28 19v27l-45 9-27-18Z"/><path d="M262 205l44-9 28 19v27l-45 9-27-18Z"/><path d="M340 218l44-9 28 19v27l-45 9-27-18Z"/></g>
+  <g fill="#6f8f6a"><circle cx="62" cy="202" r="16"/><circle cx="64" cy="244" r="13"/><circle cx="470" cy="183" r="16"/><circle cx="489" cy="220" r="13"/></g>
+  <path d="M345 263L398 276 385 325 331 311Z" fill="#b58958" stroke="#7d6245" stroke-width="2"/><path d="M379 306l67 52" stroke="#b58958" stroke-width="9"/><path d="M386 318l68 49" stroke="#f5e8c9" stroke-width="2"/>
+  <path d="M451 358q23-18 44 0v18h-44Z" fill="#f4f1df" stroke="#45634d" stroke-width="2"/><path d="M457 357l17-25 16 25" fill="#d66e49" stroke="#9e4b34" stroke-width="2"/><path d="M489 383q20-15 39 0v15h-39Z" fill="#f4f1df" stroke="#45634d" stroke-width="2"/><path d="M495 383l14-20 14 20" fill="#d66e49" stroke="#9e4b34" stroke-width="2"/>
+  <g font-family="Arial" font-size="11" fill="#244639" stroke="#758b6c"><path d="M125 66V31H28" fill="none"/><text x="26" y="23" stroke="none">01 / Shared hall</text><path d="M426 92V46H525" fill="none"/><text x="410" y="38" stroke="none">02 / Solar shade</text><path d="M388 288V253H500" fill="none"/><text x="426" y="245" stroke="none">03 / Boat landing</text><path d="M231 244V281H90" fill="none"/><text x="30" y="293" stroke="none">04 / Safe ground</text></g>
+  <text x="280" y="428" text-anchor="middle" font-family="Arial" font-size="10" fill="#43676b" letter-spacing="1.2">WATER ACCESS WHERE IT IS SAFE, LEGAL AND SUITABLE</text>
+</svg>
