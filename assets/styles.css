@@ -492,3 +492,35 @@
   .toc--right>.toc-summary{padding:8px 12px;font-size:10px}
   .toc--right .toc-panel{max-height:60vh;bottom:48px;position:relative}
 }
+
+/* Ecosystem cell diagram (index "how the parts connect") */
+.eco{position:relative;width:min(620px,96%);margin:44px auto 8px}
+.eco-cell{position:relative;aspect-ratio:1;border:1.5px solid var(--line);border-radius:50%}
+.eco-cell::before{content:'';position:absolute;inset:16%;border:1px dashed var(--line);border-radius:50%}
+.eco-ghost{position:absolute;border:1.5px dashed var(--line);border-radius:50%;pointer-events:none}
+.eco-ghost--a{width:36%;aspect-ratio:1;top:-5%;left:-7%;opacity:.5}
+.eco-ghost--b{width:27%;aspect-ratio:1;bottom:-4%;right:-5%;opacity:.4}
+.eco-node{position:absolute;width:26%;transform:translate(-50%,-50%);text-align:center;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:10px 8px;line-height:1.25}
+.eco-node span{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.eco-node strong{display:block;font-size:13px;margin-top:2px}
+.eco-node small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.eco-node--0{top:16%;left:50%}
+.eco-node--1{top:39%;left:82%}
+.eco-node--2{top:78%;left:70%}
+.eco-node--3{top:78%;left:30%}
+.eco-node--4{top:39%;left:18%}
+.eco-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:27%;aspect-ratio:1;border-radius:50%;background:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px}
+.eco-center strong{font-size:13px;line-height:1.2}
+.eco-center span{font-size:11px;color:var(--muted);margin-top:3px}
+.eco-caption{max-width:640px;margin:20px auto 0;text-align:center;color:var(--muted);font-size:14px}
+@media(max-width:560px){
+  .eco{width:100%}
+  .eco-node{width:29%;padding:6px 4px;border-radius:10px}
+  .eco-node strong{font-size:11px}
+  .eco-node small{display:none}
+  .eco-center strong{font-size:11px}
+}
+
+/* Hero pull-quote (index) — quieter variant of .thesis */
+.hero .thesis{border:none;border-left:3px solid var(--orange);grid-template-columns:1fr;gap:6px;padding:2px 0 2px 20px;margin-top:30px;max-width:540px}
+.hero .thesis blockquote{font-size:20px;line-height:1.5}
