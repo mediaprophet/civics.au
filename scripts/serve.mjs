@@ -5,7 +5,7 @@ import path from 'node:path';
 import { pages } from '../content/pages.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const pageSet = new Set([...pages.map(p => `${p.slug}.html`), 'eoi-sent.html']);
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.md': 'text/plain; charset=utf-8', '.json': 'application/json', '.wasm': 'application/wasm' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.md': 'text/plain; charset=utf-8', '.json': 'application/json', '.wasm': 'application/wasm', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.jfif': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon' };
 http.createServer(async (request, response) => {
  try {
   const url = new URL(request.url, 'http://localhost');
@@ -19,7 +19,7 @@ http.createServer(async (request, response) => {
   }
 
   const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
-  if (!(pageSet.has(relative) || relative === '404.html' || relative.match(/^assets\/[a-z0-9._/-]+\.(css|js|svg|json|wasm)$/))) {
+  if (!(pageSet.has(relative) || relative === '404.html' || relative.match(/^assets\/[a-z0-9._/-]+\.(css|js|svg|json|wasm|jpg|jpeg|jfif|png|webp|gif|ico)$/))) {
     const notFoundData = await readFile(path.join(root, '404.html'));
     response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
     response.end(notFoundData);
