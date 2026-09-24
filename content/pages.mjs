@@ -368,10 +368,22 @@ export const pages = [
       { id: 'standing-on-decades', title: 'Standing on decades of unpaid work', html: `<p>The standards themselves were built the same way these projects run: by a relatively small number of people, much of it unpaid and at their own expense, over many years. The W3C's royalty-free patent policy means that inheritance is permanently usable—no licence fees, no permission needed. The ecosystem turns that commons into working local capability; and the community ledger finally gives the unpaid a mechanism—obligation costs repaid when derivatives earn—that the internet never gave the standards' own builders.</p>` },
       { id: 'where-the-internet-didnt', title: 'Reaching where the internet did not', html: `<p>The commercial web never found the value in reaching billions of people—so it didn't. A tested, modular, standards-based stack changes that arithmetic: the same small box and the same software work in a community centre, a remote township, or an informal settlement. Work proven on one Australian community ground becomes a template any community anywhere can adapt—connecting people to knowledge and opportunity that older systems never found a business case for, described further in <a href="bigger-picture.html">beyond our town</a>.</p>` },
       { id: 'the-honest-edge', title: 'The honest edge of the manifold', html: `<div class="note"><p><strong>A manifold is not a guarantee.</strong> The foundations supply the parts, the standards supply the reach, and the cooperative projects supply the working method—but every new application still needs its own governance, domain review and local partners. What the manifold removes is the permission slip and the starting cost; what it can't remove is the work.</p></div>` }
+    ], next: 'international'
+  },
+  {
+    slug: 'international', nav: 'International', order: 13, title: 'The same pattern, other soils.',
+    description: 'The civics.au components were designed in Australia and designed to travel—a scaffold of elements other regions can pick up, investigate and localise.',
+    eyebrow: 'International / The scaffold travels', intro: 'Everything on this site was designed in Australia—and designed to travel. The standards are international; the pattern is repeatable; the particulars are always local.',
+    sections: [
+      { id: 'a-scaffold-not-a-product', title: 'A scaffold, not a product', html: `<p>The pieces this site describes—community grounds, data safes, databoxes, electronic instruments, knowledge banks, cooperative projects—form a <strong>scaffold of elements</strong> that other regions can pick up and progress. Not a product to import: a pattern to adapt. Each region's version needs its own investigation and localisation—different laws, currencies, land tenure, building stock, climate and culture. The protocol is portable; the particulars are local.</p>` },
+      { id: 'europe', title: 'Europe: heritage and hollow towns', html: `<p>Europe holds versions of the same problem at grander scale. There are châteaux and castles with land and history but no resources to fix the roof—heritage slowly decaying for want of an economic engine. There are towns with streets of abandoned buildings—places depopulated rather than dilapidated. The same pattern applies differently: a maintenance economy around heritage; a repopulation scaffold around hollow towns; the grounds model scaled to buildings that already stand.</p>` },
+      { id: 'elsewhere', title: 'Elsewhere: cheaper foundations', html: `<p>In much of the world, village-scale infrastructure costs a fraction of what it costs in Australia—land, labour, materials and regulatory overhead are all lower. The same scaffold delivers more per dollar there, which matters for the developing regions this work has always had in view: the Sustainable Development Goals are not decoration on this design; distributed energy, water, connectivity and dignified shelter are its substance.</p>` },
+      { id: 'designed-in-australia', title: 'Designed in Australia, tested by Australia', html: `<p>The components were developed through many years of research, development and demonstration here—including by watching what did not work: attempts to revive defunct resorts, and tiny-house village proposals that failed. The design learned from those failures rather than repeating them: generative infrastructure instead of extractive rents; open standards instead of proprietary lock-in; a whole ecosystem instead of a single fix.</p>` },
+      { id: 'the-path', title: 'The path', html: `<p>This work is continuing. The hope is that a path is found in Australia first—the need is here, the design is shaped for here, and the people it is built for are here. But if no path opens, the effort does not end: it redirects toward the regions where the same pattern can advance—<strong>perhaps even, on the ground.</strong></p>` }
     ], next: 'eoi'
   },
   {
-    slug: 'eoi', nav: 'Express interest', order: 13, title: 'Support, partnership & local opportunity.',
+    slug: 'eoi', nav: 'Express interest', order: 14, title: 'Support, partnership & local opportunity.',
     description: 'Register an expression of interest in supporting, informing or participating in a future civics.au Community Grounds pilot.',
     eyebrow: '13 / Expression of interest', intro: 'We are seeking early conversations with people and organisations who may help shape, support or take part in future Community Grounds pilots.',
     sections: [
@@ -540,7 +552,7 @@ export const pages = [
     ]
   },
   {
-    slug: 'model', nav: 'Modelling lab', order: 12, group: 'Components & tools', map: true, sites: true, toc: 'right', title: 'Run the numbers yourself.',
+    slug: 'model', nav: 'Modelling lab', order: 11.5, group: 'Components & tools', map: true, sites: true, toc: 'right', title: 'Run the numbers yourself.',
     description: 'An interactive, in-browser modelling environment for community-scale infrastructure: set your own assumptions, scope it to a community or town, save variants locally and export a PDF report.',
     eyebrow: '12 / Modelling lab', intro: 'A complete evaluation model runs entirely in your browser. Pick a scenario, adjust the assumptions to fit your community, town or application, save variants to local web storage, and export a report.',
     sections: [
