@@ -1,0 +1,8 @@
+{
+  "access_policy": "public-not-for-redistribution",
+  "source_sha256": "85e267015dfeeeea9edbc299ec87d5076ae45ccb1f44978e9605d298a7819ebd",
+  "mapping_version": "civics-release-provenance-v1",
+  "context_digest": "https://civics.au/ontology/evaluation.ttl",
+  "compiler_build_digest": "0.0.39",
+  "engine_version": "0.0.39"
+}

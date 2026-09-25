@@ -1,0 +1,17 @@
+{
+  "profile": "web-civics-wasm-quin-pack/0.1.0-draft",
+  "engineVersion": "0.0.39",
+  "compiledProfile": "webcivics",
+  "inputContentType": "application/n-triples",
+  "quinCount": 29,
+  "blocks": [
+    {
+      "file": "wasm-superblock-000000.bin",
+      "byteSize": 40960,
+      "quinCount": 29,
+      "sha256": "fa6fec24ed92eeb4e6bd9f80f91b09999424044cd738bc0a9136b3b0acf6c9d5"
+    }
+  ],
+  "ownerDid": "0 (unassigned; no identity data was supplied)",
+  "limitation": "These are WASM-packed Qualia SuperBlocks, not a standalone Q42 v3 volume. Native Q42 finalisation remains quarantined pending QW-10."
+}

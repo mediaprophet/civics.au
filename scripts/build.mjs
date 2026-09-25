@@ -17,7 +17,7 @@ try {
   await cp(path.join(root, '.nojekyll'), path.join(dist, '.nojekyll'));
 } catch {}
 
-function renderHead({ title, description, slug, pageType = 'WebPage', map = false, sites = false }) {
+function renderHead({ title, description, slug, pageType = 'WebPage', map = false, sites = false, evidenceDashboard = false }) {
   const safeTitle = escape(title);
   const safeDesc = escape(description);
   const pageUrl = `https://civics.au/${slug}.html`;
@@ -112,6 +112,7 @@ ${map ? `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leafl
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 <script src="assets/sunmap.js?v=${v}" defer></script>` : ''}
 ${sites ? `<script src="assets/sites.js?v=${v}" defer></script>` : ''}
+${evidenceDashboard ? `<script src="assets/evidence-dashboard.js?v=${v}" defer></script>` : ''}
 <script src="assets/site.js?v=${v}" defer></script>
 </head>`;
 }
@@ -175,7 +176,7 @@ for (const page of pages) {
 
   const pageTitle = page.htmlTitle || (page.hero ? 'Community Grounds — A place to land. Room to move.' : page.nav);
   const pageType = page.slug === 'eoi' ? 'ContactPage' : (page.slug === 'index' ? 'WebSite' : 'WebPage');
-  const headHtml = renderHead({ title: pageTitle, description: page.description, slug: page.slug, pageType, map: page.map, sites: page.sites });
+  const headHtml = renderHead({ title: pageTitle, description: page.description, slug: page.slug, pageType, map: page.map, sites: page.sites, evidenceDashboard: page.evidenceDashboard });
 
   const html = `<!doctype html>
 <html lang="en-AU"><head prefix="og: https://ogp.me/ns#">${headHtml.replace('<head>', '').replace('</head>', '')}</head><body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="masthead">${brand}<span class="mast-note">Ideas for a more resilient society<br>Australia → the world</span></header><nav class="nav" aria-label="Main navigation">${navHtml}</nav><main id="main">${body}</main><footer class="footer"><span>civics.au · A civics ecosystem · Concept collection · September 2026</span><div><a href="review.html#sources">Sources & scope</a><a href="review.html#pilot-questions">Questions for a pilot</a></div></footer></div></body></html>\n`;

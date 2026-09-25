@@ -1,0 +1,39 @@
+{
+  "modelId": "community-grounds-economic-statistical-v1",
+  "case": {
+    "id": "community-grounds-example",
+    "title": "Community grounds staged implementation appraisal",
+    "valuationDate": "2026-07-01",
+    "priceBasis": {"currency": "AUD", "priceYear": 2026, "basis": "real"},
+    "discountRate": 0.04,
+    "analysisYears": 10,
+    "decision": "Compare a do-minimum baseline with staged implementation; do not infer an approval from calculated values."
+  },
+  "alternatives": [
+    {
+      "id": "do-minimum",
+      "label": "Do minimum",
+      "cashFlows": [],
+      "outcomeMeasures": []
+    },
+    {
+      "id": "staged-community-grounds",
+      "label": "Staged community grounds",
+      "cashFlows": [
+        {"id":"capex","perspective":"operator-financial","year":0,"direction":"cost","amountAud":null,"category":"capital works","sourceId":"required-site-quote","limitation":"Awaiting reviewed quote."},
+        {"id":"operating-cost","perspective":"operator-financial","year":1,"direction":"cost","amountAud":null,"category":"operations","sourceId":"required-operating-budget","limitation":"Awaiting operating model."},
+        {"id":"programme-receipts","perspective":"operator-financial","year":1,"direction":"benefit","amountAud":null,"category":"receipts","sourceId":"required-programme-design","limitation":"No demand forecast admitted."},
+        {"id":"public-funding","perspective":"government-fiscal","year":0,"direction":"cost","amountAud":null,"category":"grant or service funding","sourceId":"required-funding-design","limitation":"No committed funding decision."},
+        {"id":"resource-cost","perspective":"social-economic","year":0,"direction":"cost","amountAud":null,"category":"incremental resource cost","sourceId":"required-economic-cost-study","limitation":"No resource-cost estimate admitted."}
+      ],
+      "outcomeMeasures": [
+        {"id":"occupied-nights","label":"Occupied nights","unit":"nights","series":[],"sourceId":"required-operations-data","limitation":"Measure after an approved pilot; do not substitute bookings for occupancy."},
+        {"id":"participant-defined-outcome","label":"Participant-defined outcome","unit":"reported outcome","series":[],"sourceId":"required-consented-evaluation","limitation":"No monetary value assumed; protect small cohorts."}
+      ]
+    }
+  ],
+  "sensitivityCases": [
+    {"id":"construction-cost-high","label":"Higher capital-cost case","overrides":[{"alternativeId":"staged-community-grounds","flowId":"capex","amountAud":null}]},
+    {"id":"lower-utilisation","label":"Lower utilisation case","overrides":[{"alternativeId":"staged-community-grounds","flowId":"programme-receipts","amountAud":null}]}
+  ]
+}

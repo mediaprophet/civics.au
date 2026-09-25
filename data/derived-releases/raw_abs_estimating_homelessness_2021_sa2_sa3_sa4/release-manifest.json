@@ -1,0 +1,48 @@
+{
+  "profile": "web-civics-q42-release/0.1.0-draft",
+  "source": {
+    "id": "raw_abs_estimating_homelessness_2021_sa2_sa3_sa4",
+    "datasetId": "D15-ABS-HOMELESSNESS",
+    "publisher": "Australian Bureau of Statistics",
+    "sourceUrl": "https://www.abs.gov.au/statistics/people/housing/estimating-homelessness-census/2021",
+    "referencePeriod": "2021 Census",
+    "fileName": "abs-estimating-homelessness-2021-sa2-sa3-sa4.xlsx",
+    "byteSize": 327822,
+    "hash": "c3a3632c288fdea0d36edc10fb280c7a223a1295fad948486c8d52b8b03f9d3b",
+    "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "retrievedAt": "2026-09-25T00:00:00Z",
+    "retrievalTimestampPrecision": "day; acquisition log records 2026-09-25 but no original clock time",
+    "licenceStatus": "Public release; licence and reuse terms require review before public redistribution.",
+    "access": "public",
+    "admission": "governance-required",
+    "parserProfile": "release-provenance/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "mappingVersion": "release-provenance/1.0.0",
+    "mappingStatus": "release-provenance-complete; observation mapping not yet reviewed",
+    "contentScope": "release-provenance-only",
+    "sourceId": "source_abs_estimating_homelessness_2021_sa2_sa3_sa4",
+    "volumeId": "q42_abs_estimating_homelessness_2021_sa2_sa3_sa4"
+  },
+  "products": {
+    "turtle": "release-provenance.ttl",
+    "canonicalNQuads": "canonical.nq",
+    "nativeCompileInput": "canonical.nq",
+    "wasmQuinPack": {
+      "receipt": "wasm-parse-receipt.json",
+      "quinCount": 29,
+      "superblocks": [
+        "wasm-superblock-000000.bin"
+      ]
+    },
+    "q42": {
+      "file": "canonical.q42",
+      "sha256": "36b867c01d6ef27069f10d8d5976cde96c63c7d978736d5a610af936f8b0f574",
+      "byteSize": 5006,
+      "q42Version": 3,
+      "lexicalEntries": 49,
+      "fullVerification": "passed",
+      "publicationStatus": "review-gated-local-only",
+      "knownEngineGaps": []
+    }
+  },
+  "limitation": "This product records release provenance only. It does not assert workbook/CSV/PDF observations until a reviewed source-specific semantic mapping is applied."
+}

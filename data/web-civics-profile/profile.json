@@ -1,0 +1,263 @@
+﻿{
+    "$schema":  "./profile.schema.json",
+    "profileId":  "https://civics.au/profiles/web-civics/0.1",
+    "name":  "Web Civics evidence and evaluation profile",
+    "version":  "0.1.0-draft",
+    "status":  "draft",
+    "purpose":  "A portable contract for evidence-backed community, infrastructure and public-interest decisions.",
+    "runtime":  {
+                    "engine":  "QualiaDB WASM",
+                    "minimumObservedBundle":  "0.0.39",
+                    "preferredCargoFeature":  "wasm-webcivics",
+                    "compiledProfile":  "webcivics",
+                    "qualiaWorkspace":  "C:/Projects/qualia-27062026",
+                    "artifact":  {
+                                     "path":  "docs/pkg/webcivics/qualia_webcivics_bg.wasm",
+                                     "absolutePath":  "C:/Projects/qualia-27062026/docs/pkg/webcivics/qualia_webcivics_bg.wasm",
+                                     "sha256":  "68987faa5d53dc3c66f3a82e4adfc2cb9953faeeff027e087648b0a6c57ec2ad",
+                                     "rawBytes":  3072294,
+                                     "gzipBytes":  1055238,
+                                     "pinnedAt":  "2026-09-25",
+                                     "digestDoc":  "C:/Projects/qualia-27062026/docs/releases/0.0.39-wasm-digests.md"
+                                 },
+                    "requiredCapabilities":  [
+                                                 "json-ld-ingest",
+                                                 "json-ld-serialize",
+                                                 "json-ld-compact-serialize",
+                                                 "json-ld-context-digest",
+                                                 "rdf-serialization",
+                                                 "solid-rdf-media-types",
+                                                 "rdfc-1.0-status",
+                                                 "vendor-nquin-cbor",
+                                                 "package-exposure-manifest",
+                                                 "n3-parser",
+                                                 "turtle-parser",
+                                                 "shacl-property-validation",
+                                                 "shacl-graph-validation",
+                                                 "deontic-logic",
+                                                 "epistemic-logic",
+                                                 "paraconsistent-routing",
+                                                 "temporal-ltl",
+                                                 "q42-kernel-sparql-extensions",
+                                                 "numerical-solvers",
+                                                 "economics",
+                                                 "symbolic-logic",
+                                                 "device-storage-policy",
+                                                 "opfs-primary-vault",
+                                                 "backup-folder-link",
+                                                 "solid-leave-migrate",
+                                                 "solid-qualia-return"
+                                             ],
+                    "capabilityAliases":  {
+                                              "turtle-n3-parse":  [
+                                                                      "n3-parser",
+                                                                      "turtle-parser"
+                                                                  ],
+                                              "solid-rdf-source":  [
+                                                                       "solid-rdf-media-types",
+                                                                       "rdf-serialization",
+                                                                       "json-ld-ingest",
+                                                                       "json-ld-serialize",
+                                                                       "json-ld-compact-serialize",
+                                                                       "n3-parser",
+                                                                       "turtle-parser"
+                                                                   ],
+                                              "sparql-query":  [
+                                                                   "ntriples-query",
+                                                                   "q42-kernel-sparql-extensions"
+                                                               ],
+                                              "numeric-shacl-facets":  [
+                                                                           "shacl-property-validation",
+                                                                           "shacl-graph-validation"
+                                                                       ],
+                                              "logic-functions":  [
+                                                                      "deontic-logic",
+                                                                      "epistemic-logic",
+                                                                      "paraconsistent-routing",
+                                                                      "temporal-ltl",
+                                                                      "description-logic",
+                                                                      "answer-set-programming"
+                                                                  ],
+                                              "scientific-functions":  [
+                                                                           "numerical-solvers",
+                                                                           "economics"
+                                                                       ],
+                                              "device-storage":  [
+                                                                     "device-storage-policy",
+                                                                     "opfs-primary-vault",
+                                                                     "backup-folder-link"
+                                                                 ],
+                                              "solid-leave-migrate":  [
+                                                                          "solid-leave-migrate",
+                                                                          "solid-qualia-return",
+                                                                          "solid-rdf-media-types"
+                                                                      ]
+                                          },
+                    "explicitlyExcluded":  [
+                                               "gpu-runtime",
+                                               "webgpu-viewport",
+                                               "webgpu-inference",
+                                               "gguf-parser",
+                                               "streaming-decode",
+                                               "compile-rdf-to-q42-wasm"
+                                           ],
+                    "profileModes":  [
+                                         "browser-discovery",
+                                         "verified-evaluation",
+                                         "native-bridge"
+                                     ],
+                    "solid":  {
+                                  "protocol":  "https://solidproject.org/TR/protocol",
+                                  "rdfSourceMediaTypes":  [
+                                                              "text/turtle",
+                                                              "application/ld+json",
+                                                              "text/n3"
+                                                          ],
+                                  "secondaryMediaTypes":  [
+                                                              "text/rdf+n3",
+                                                              "application/n-triples",
+                                                              "application/n-quads",
+                                                              "application/trig"
+                                                          ],
+                                  "defaultContentType":  "text/turtle",
+                                  "wasmExports":  [
+                                                      "serialize_rdf_wasm",
+                                                      "parse_rdf_document_wasm",
+                                                      "solid_negotiate_accept_wasm",
+                                                      "parse_jsonld_wasm",
+                                                      "plan_sanctuary_migration_wasm",
+                                                      "export_solid_migration_wasm",
+                                                      "import_solid_to_qualia_backup_wasm"
+                                                  ],
+                                  "acceptNegotiation":  true,
+                                  "jsonLdCompactPinnedContext":  true,
+                                  "fixtureSuite":  "C:/Projects/qualia-27062026/docs/tests/webcivics-solid-rdf.test.mjs"
+                              },
+                    "deviceStorage":  {
+                                          "primary":  {
+                                                          "kind":  "opfs",
+                                                          "directory":  "webcivics",
+                                                          "manifest":  "vault-manifest.v1.json",
+                                                          "persistPermission":  true,
+                                                          "blockSizeBytes":  40960,
+                                                          "minHeadroomBytes":  8388608
+                                                      },
+                                          "backup":  {
+                                                         "kind":  "user-directory-or-host-path",
+                                                         "suggestedSubdir":  "webcivics-backups",
+                                                         "retentionCount":  5,
+                                                         "idbName":  "webcivics-device-storage-v1",
+                                                         "formats":  [
+                                                                         "application/vnd.web-civics.vault-backup+json",
+                                                                         "application/ld+json",
+                                                                         "text/turtle"
+                                                                     ],
+                                                         "fallbackWhenNoPicker":  "download-blob-or-share-sheet",
+                                                         "hostPathPreferenceKey":  "backup_host_path"
+                                                     },
+                                          "recovery":  {
+                                                           "restoreRequiresManifest":  true,
+                                                           "verifyContentHash":  true,
+                                                           "primaryWipeDoesNotEraseBackup":  true
+                                                       },
+                                          "wasmExports":  [
+                                                              "device_storage_policy_wasm",
+                                                              "plan_device_storage_wasm",
+                                                              "verify_backup_manifest_wasm",
+                                                              "estimate_browser_storage",
+                                                              "pack_quins_into_superblock",
+                                                              "write_opfs_block",
+                                                              "read_opfs_block"
+                                                          ],
+                                          "hostAdapter":  "C:/Projects/qualia-27062026/docs/js/webcivics-device-storage.js",
+                                          "mobileNotes":  "On install: call requestPersist(); pickBackupFolder() or setHostBackupPath(Documents/webcivics-backups); run exportBackup on a schedule. OPFS wipe does not delete the linked backup folder."
+                                      }
+                },
+    "formats":  {
+                    "semanticInput":  [
+                                          "application/ld+json",
+                                          "text/turtle",
+                                          "text/n3",
+                                          "application/n-quads",
+                                          "application/n-triples"
+                                      ],
+                    "semanticOutput":  [
+                                           "text/turtle",
+                                           "application/ld+json",
+                                           "text/n3",
+                                           "application/n-triples",
+                                           "application/n-quads",
+                                           "application/trig"
+                                       ],
+                    "solidRdfSource":  [
+                                           "text/turtle",
+                                           "application/ld+json",
+                                           "text/n3"
+                                       ],
+                    "canonicalEvidenceHash":  "RDFC-1.0 N-Quads canonicalization and SHA-256",
+                    "ordinaryApplicationData":  "application/json",
+                    "binaryDerived":  [
+                                          "application/cbor-ld",
+                                          "application/vnd.qualia.nquin-cbor",
+                                          "application/q42"
+                                      ],
+                    "ruleSource":  "text/x-vibescript",
+                    "ruleBinary":  "application/vnd.web-civics.vibe-bytecode"
+                },
+    "inputs":  [
+                   "CaseDefinition",
+                   "DatasetRelease",
+                   "ObservationBatch",
+                   "ParameterSet",
+                   "Scenario",
+                   "RuleSet",
+                   "VibeProgram",
+                   "DataAccessEnvelope"
+               ],
+    "outputs":  [
+                    "AdmissionReport",
+                    "ValidationReport",
+                    "QueryResult",
+                    "CalculationResult",
+                    "ReasoningTrace",
+                    "RunReceipt",
+                    "ReportPackage"
+                ],
+    "pipeline":  [
+                     "source-acquisition",
+                     "parse",
+                     "map",
+                     "validate",
+                     "canonicalise",
+                     "compile-derived-products",
+                     "publish-versioned-release"
+                 ],
+    "admissionMinimum":  [
+                             "identifier",
+                             "publisher",
+                             "sourceUrl",
+                             "retrievedAt",
+                             "referencePeriod",
+                             "licenceOrRestriction",
+                             "contentHash",
+                             "schemaVersion",
+                             "mappingVersion",
+                             "geography",
+                             "unitOrMeasure",
+                             "accessClass"
+                         ],
+    "prohibitions":  [
+                         "No unconsented personal data ingestion",
+                         "No eligibility, safety or housing-priority decision from a composite score",
+                         "No issued report without a reproducible run receipt"
+                     ],
+    "references":  [
+                       "../../docs/plans/decision-evidence/13-web-civics-profile.md",
+                       "../../docs/plans/decision-evidence/12-qualia-wasm-development-register.md",
+                       "C:/Projects/qualia-27062026/docs/manuals/wasm-capability-profiles.md",
+                       "C:/Projects/qualia-27062026/docs/releases/0.0.39-wasm-digests.md",
+                       "../research-catalogue/datasets.json",
+                       "C:/Projects/qualia-27062026/docs/manuals/wasm-webcivics-agent-api.md",
+                       "../../docs/plans/decision-evidence/14-qualia-wasm-webcivics-acceptance-review.md"
+                   ]
+}

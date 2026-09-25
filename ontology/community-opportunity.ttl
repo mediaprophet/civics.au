@@ -1,0 +1,83 @@
+@prefix c: <https://civics.au/ns/evaluation#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://civics.au/ns/community-opportunity> a <http://www.w3.org/2002/07/owl#Ontology> ;
+  dct:title "Civics community opportunity model" ;
+  dct:description "Extension vocabulary for locally agreed, temporary contribution opportunities and their separated economic, cultural, social and delivery evidence." ;
+  dct:created "2026-09-25"^^xsd:date ;
+  dct:hasVersion "0.1.0" .
+
+c:CommunityProfile a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "community profile" .
+c:CommunityOpportunity a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "community opportunity" .
+c:HostAgreement a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "host agreement" .
+c:ContributionPlacement a rdfs:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "temporary contribution placement" .
+c:BenefitHypothesis a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "benefit hypothesis" .
+c:CommunityOutcome a rdfs:Class ; rdfs:subClassOf c:Outcome ; rdfs:label "community outcome" .
+c:LocalWorkerImpactAssessment a rdfs:Class ; rdfs:subClassOf c:EvidenceAssessment ; rdfs:label "local worker impact assessment" .
+c:FairTermsAssessment a rdfs:Class ; rdfs:subClassOf c:EvidenceAssessment ; rdfs:label "fair terms assessment" .
+c:InnovationInfrastructureProfile a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "innovation infrastructure profile" .
+c:CommunityLedRDandDActivity a rdfs:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "community-led research, development and demonstration activity" .
+c:InnovationBenefitAgreement a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "innovation benefit agreement" .
+c:LocalDigitalEconomyProfile a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "local digital economy profile" .
+c:InteroperabilityConformanceRecord a rdfs:Class ; rdfs:subClassOf c:EvidenceArtifact ; rdfs:label "interoperability conformance record" .
+c:LocalCommerceServiceInventory a rdfs:Class ; rdfs:subClassOf c:RestrictedCaseEvidence ; rdfs:label "local commerce and service inventory" .
+c:LocalCredentialPolicy a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "local credential policy" .
+c:CommunityMicrogridProgramme a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "community microgrid programme" .
+c:MeteringBillingArrangement a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "metering and billing arrangement" .
+c:CriticalLoadPlan a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "critical-load plan" .
+c:ResilienceHubPlan a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "resilience hub plan" .
+c:DisasterRecoverySupportPlan a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "disaster recovery support plan" .
+c:SocialHousingSystemProfile a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "social housing system profile" .
+c:HousingPathwayAssessment a rdfs:Class ; rdfs:subClassOf c:EvidenceAssessment ; rdfs:label "housing pathway assessment" .
+c:CaseCostRecord a rdfs:Class ; rdfs:subClassOf c:Observation ; rdfs:label "case cost record" .
+c:EarlyInterventionPathway a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "early intervention pathway" .
+c:SiteSafetyPlan a rdfs:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "site safety plan" .
+
+c:hasCommunityProfile a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:CommunityProfile .
+c:hasHostAgreement a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:HostAgreement .
+c:hasPlacement a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:ContributionPlacement .
+c:hasBenefitHypothesis a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:BenefitHypothesis .
+c:hasLocalWorkerImpactAssessment a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:LocalWorkerImpactAssessment .
+c:hasFairTermsAssessment a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:FairTermsAssessment .
+c:contributorPathway a rdfs:Property ; rdfs:domain c:ContributionPlacement ; rdfs:range c:ServicePathway .
+c:hasOutcomeDomain a rdfs:Property ; rdfs:domain c:CommunityOutcome ; rdfs:range xsd:string .
+c:incrementalValue a rdfs:Property ; rdfs:range xsd:decimal .
+c:hasMeasurementPlan a rdfs:Property ; rdfs:range prov:Entity .
+c:requiresSafeguard a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:Constraint .
+c:hasInnovationInfrastructureProfile a rdfs:Property ; rdfs:domain c:CommunityProfile ; rdfs:range c:InnovationInfrastructureProfile .
+c:hasRDandDActivity a rdfs:Property ; rdfs:domain c:CommunityOpportunity ; rdfs:range c:CommunityLedRDandDActivity .
+c:hasInnovationBenefitAgreement a rdfs:Property ; rdfs:domain c:CommunityLedRDandDActivity ; rdfs:range c:InnovationBenefitAgreement .
+c:activityStage a rdfs:Property ; rdfs:domain c:CommunityLedRDandDActivity ; rdfs:range xsd:string .
+c:hasDigitalEconomyProfile a rdfs:Property ; rdfs:domain c:CommunityProfile ; rdfs:range c:LocalDigitalEconomyProfile .
+c:hasConformanceRecord a rdfs:Property ; rdfs:domain c:LocalDigitalEconomyProfile ; rdfs:range c:InteroperabilityConformanceRecord .
+c:hasServiceInventory a rdfs:Property ; rdfs:domain c:LocalDigitalEconomyProfile ; rdfs:range c:LocalCommerceServiceInventory .
+c:hasCredentialPolicy a rdfs:Property ; rdfs:domain c:LocalDigitalEconomyProfile ; rdfs:range c:LocalCredentialPolicy .
+c:hasExternalPlatformCost a rdfs:Property ; rdfs:domain c:LocalDigitalEconomyProfile ; rdfs:range xsd:decimal .
+c:hasMicrogridProgramme a rdfs:Property ; rdfs:domain c:CommunityProfile ; rdfs:range c:CommunityMicrogridProgramme .
+c:hasMeteringBillingArrangement a rdfs:Property ; rdfs:domain c:CommunityMicrogridProgramme ; rdfs:range c:MeteringBillingArrangement .
+c:hasCriticalLoadPlan a rdfs:Property ; rdfs:domain c:CommunityMicrogridProgramme ; rdfs:range c:CriticalLoadPlan .
+c:hasResilienceHubPlan a rdfs:Property ; rdfs:domain c:CommunityMicrogridProgramme ; rdfs:range c:ResilienceHubPlan .
+c:hasDisasterRecoverySupportPlan a rdfs:Property ; rdfs:domain c:ResilienceHubPlan ; rdfs:range c:DisasterRecoverySupportPlan .
+c:hasSocialHousingSystemProfile a rdfs:Property ; rdfs:domain c:CommunityProfile ; rdfs:range c:SocialHousingSystemProfile .
+c:hasHousingPathwayAssessment a rdfs:Property ; rdfs:range c:HousingPathwayAssessment .
+c:hasCaseCostRecord a rdfs:Property ; rdfs:range c:CaseCostRecord .
+c:hasEarlyInterventionPathway a rdfs:Property ; rdfs:range c:HousingPathwayAssessment ; rdfs:range c:EarlyInterventionPathway .
+c:hasSiteSafetyPlan a rdfs:Property ; rdfs:domain c:EarlyInterventionPathway ; rdfs:range c:SiteSafetyPlan .
+
+c:CommunityOpportunity rdfs:comment "An opportunity is locally defined and time bounded. A community profile supplies context; it must not be used to infer a resident's need or to rank communities for extraction." .
+c:ContributionPlacement rdfs:comment "A placement must be voluntary, have agreed terms and exit arrangements, and must not displace locally available paid work without transparent local agreement and mitigation." .
+c:BenefitHypothesis rdfs:comment "Economic, cultural/social and capability outcomes remain distinct. Do not collapse them to an unexplained score or monetise cultural participation by default." .
+c:InnovationInfrastructureProfile rdfs:comment "Profile access to work space, connectivity, equipment, test settings, data stewardship, finance, partnerships and maintenance. Missing infrastructure is a locally testable condition, not an inference from geography or disadvantage." .
+c:CommunityLedRDandDActivity rdfs:comment "Visitors may support RD&D only at the invitation of existing community leadership. Preserve local control, fair terms, data/IP governance, benefit sharing, safety and an exit/maintenance plan." .
+c:LocalDigitalEconomyProfile rdfs:comment "Measure locally consented retail, service and tourism discovery capability, interoperability, external-platform dependence, costs and access. Do not infer adoption, savings or sovereignty from a technical architecture." .
+c:InteroperabilityConformanceRecord rdfs:comment "Name the exact protocol/specification version, implemented functions, test method and result. A compatibility claim is not an assertion that every dependent commerce function exists." .
+c:LocalCredentialPolicy rdfs:comment "A locals credential needs a lawful, fair eligibility, privacy, accessibility, issuer, verifier, complaint and retention policy. It must not become a general surveillance or exclusion mechanism." .
+c:CommunityMicrogridProgramme rdfs:comment "A programme may coordinate local generation, storage, demand flexibility and participating sites. It does not imply an embedded-network, energy-selling or bill-saving arrangement without jurisdiction-specific approval and contracts." .
+c:MeteringBillingArrangement rdfs:comment "Separate measurement from billing and energy retail. Record meter accuracy, data access, tariffs, allocation, retailer/exemption/market roles, customer protections, complaints and exit arrangements." .
+c:ResilienceHubPlan rdfs:comment "A resilience hub is a planned capability with tested critical loads, availability, staffing, accessibility, communications and emergency-agency coordination. It is not an assertion that a site is a refuge or will remain available in every event." .
+c:SocialHousingSystemProfile rdfs:comment "Keep dwellings, households, waitlists, greatest-need measures, allocations, transfers and expenditure as differently defined series. Do not derive a universal shortage by arithmetic across them." .
+c:EarlyInterventionPathway rdfs:comment "A voluntary, lower-intensity pathway can reduce pressure only as a tested hypothesis. It must not replace permanent housing, clinical, disability, youth, justice or other specialist support for a person whose assessment requires it." .
+c:SiteSafetyPlan rdfs:comment "Aim to prevent and resolve suitable issues through design, clear agreements, support, complaints and restorative responses, while retaining immediate emergency escalation. Low police call-outs must never be achieved by suppressing help-seeking or avoiding safety reporting." .

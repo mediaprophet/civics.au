@@ -1,0 +1,29 @@
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#DatasetRelease> .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <http://purl.org/dc/terms/publisher> "Productivity Commission" .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#catalogueId> "D32-PC-ROGS-HOUSING-HOMELESSNESS" .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#referencePeriod> "2026 release" .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#licenceStatus> "Public release; licence and reuse terms require review before public redistribution." .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#hasAccessClass> <https://civics.au/ns/evaluation#Public> .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#hasAdmissionState> <https://civics.au/ns/evaluation#GovernanceRequired> .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#hasSourceArtifact> <https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#hasContentScope> <https://civics.au/ns/evaluation#ReleaseProvenanceOnly> .
+<https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/ns/prov#wasDerivedFrom> <https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#SourceArtifact> .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/ns/dcat#downloadURL> <https://www.pc.gov.au/ongoing/report-on-government-services/housing-homelessness/> .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#sourceUrl> <https://www.pc.gov.au/ongoing/report-on-government-services/housing-homelessness/> .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#sourceFileName> "pc-rogs-2026-homelessness-services-data-tables.xlsx" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#mediaType> "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#byteSize> "432933" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#sha256> "8c93012b5ac47c8b2ccd695ca3f1bcb8697a9c819556217710e5eb17d625458c" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#retrievedAt> "2026-09-25T00:00:00Z" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#retrievalTimestampPrecision> "day; acquisition log records 2026-09-25 but no original clock time" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#parserProfile> "release-provenance/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#mappingVersion> "release-provenance/1.0.0" .
+<https://civics.au/source-artifacts/source_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#mappingStatus> "release-provenance-complete; observation mapping not yet reviewed" .
+<https://civics.au/semantic-mappings/raw_pc_rogs_2026_homelessness_services_data_tables/release-provenance-1.0.0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#SemanticMapping> .
+<https://civics.au/semantic-mappings/raw_pc_rogs_2026_homelessness_services_data_tables/release-provenance-1.0.0> <https://civics.au/ns/evaluation#mappingVersion> "release-provenance/1.0.0" .
+<https://civics.au/semantic-mappings/raw_pc_rogs_2026_homelessness_services_data_tables/release-provenance-1.0.0> <https://civics.au/ns/evaluation#mappingStatus> "release-provenance-complete; observation mapping not yet reviewed" .
+<https://civics.au/q42/q42_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#Q42Volume> .
+<https://civics.au/q42/q42_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#mediaType> "application/q42" .
+<https://civics.au/q42/q42_pc_rogs_2026_homelessness_services_data_tables> <https://civics.au/ns/evaluation#q42FormatVersion> "3" .
+<https://civics.au/q42/q42_pc_rogs_2026_homelessness_services_data_tables> <http://www.w3.org/ns/prov#wasDerivedFrom> <https://civics.au/dataset-releases/raw_pc_rogs_2026_homelessness_services_data_tables> .

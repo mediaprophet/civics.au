@@ -1,0 +1,33 @@
+{
+  "$schema": "./transformation.schema.json",
+  "id": "transform-abs-data-by-region-example",
+  "version": "0.1.0-draft",
+  "datasetId": "D03-ABS-DATA-BY-REGION",
+  "release": {"sourceUrl": "https://example.invalid/source", "expectedMediaType": "text/csv", "sha256": "replace-with-admitted-release-hash", "retrievedAt": "YYYY-MM-DDTHH:MM:SSZ"},
+  "access": {"class": "public", "licenceReview": "required", "personalData": "prohibited"},
+  "input": {"parser": "csv", "encoding": "utf-8", "header": true, "primaryKey": ["geography_code", "reference_period", "indicator_code"], "sourceLocator": "record row, sheet/cell range, JSON Pointer, feature ID or page/table as applicable"},
+  "chunking": {"strategy": "records", "maximumRecords": 10000, "maximumBytes": 16777216, "checkpointEvery": 1000, "orderBy": ["geography_code", "reference_period", "indicator_code"], "resumeKey": "primary-key-and-source-hash", "retry": {"maximumAttempts": 3, "backoff": "exponential"}},
+  "mapping": {
+    "mappingVersion": "1.0.0",
+    "entity": "c:Observation",
+    "fields": {
+      "id": {"from": ["geography_code", "reference_period", "indicator_code"], "transform": "stable-local-id"},
+      "indicatorId": {"from": "indicator_code", "transform": "controlled-iri"},
+      "originalValue": {"from": "value"},
+      "numericValue": {"from": "value", "transform": "decimal-or-null"},
+      "unit": {"from": "unit"},
+      "geographyId": {"from": "geography_code", "transform": "abs-geography-iri"},
+      "referencePeriod": {"from": "reference_period"},
+      "sourceLocator": {"from": "source_row", "transform": "row-locator"}
+    },
+    "suppression": {"values": ["", "na", "n.p.", "confidential"], "result": "missing-with-limitation"},
+    "derivedValues": "declared-separately; never overwrite originalValue"
+  },
+  "validation": {"shapes": ["c:DatasetReleaseShape", "c:ObservationShape"], "minimumQuality": ["unit", "period", "geography", "sourceLocator", "limitation"], "failOn": ["duplicate-primary-key", "unknown-unit", "invalid-period", "unauthorised-personal-data"]},
+  "products": [
+    {"format": "text/turtle", "role": "audit-source", "required": true},
+    {"format": "application/n-quads", "role": "canonical-evidence", "required": true},
+    {"format": "application/q42", "role": "query-index", "required": false, "requiresCapability": "compile-rdf-to-q42-wasm"}
+  ],
+  "publication": {"publicPath": "/datasets/abs-data-by-region/{releaseId}/", "manifest": "dataset-manifest.json", "integrity": "sha256", "cache": "immutable-versioned", "include": ["release-manifest.json", "validation-report.json", "use-contract.json", "source.ttl", "canonical.nq", "data.q42"]}
+}

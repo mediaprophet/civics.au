@@ -1,0 +1,48 @@
+{
+  "profile": "web-civics-q42-release/0.1.0-draft",
+  "source": {
+    "id": "raw_pc_rogs_2026_homelessness_services_dataset",
+    "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+    "publisher": "Productivity Commission",
+    "sourceUrl": "https://www.pc.gov.au/ongoing/report-on-government-services/housing-homelessness/",
+    "referencePeriod": "2026 release",
+    "fileName": "pc-rogs-2026-homelessness-services-dataset.csv",
+    "byteSize": 1133782,
+    "hash": "4cb38419eb586279269ee6f48b90cf3e1bc42e8926b1872b40a24526436e8df7",
+    "mediaType": "text/csv",
+    "retrievedAt": "2026-09-25T00:00:00Z",
+    "retrievalTimestampPrecision": "day; acquisition log records 2026-09-25 but no original clock time",
+    "licenceStatus": "Public release; licence and reuse terms require review before public redistribution.",
+    "access": "public",
+    "admission": "governance-required",
+    "parserProfile": "release-provenance/text/csv",
+    "mappingVersion": "release-provenance/1.0.0",
+    "mappingStatus": "release-provenance-complete; observation mapping not yet reviewed",
+    "contentScope": "release-provenance-only",
+    "sourceId": "source_pc_rogs_2026_homelessness_services_dataset",
+    "volumeId": "q42_pc_rogs_2026_homelessness_services_dataset"
+  },
+  "products": {
+    "turtle": "release-provenance.ttl",
+    "canonicalNQuads": "canonical.nq",
+    "nativeCompileInput": "canonical.nq",
+    "wasmQuinPack": {
+      "receipt": "wasm-parse-receipt.json",
+      "quinCount": 29,
+      "superblocks": [
+        "wasm-superblock-000000.bin"
+      ]
+    },
+    "q42": {
+      "file": "canonical.q42",
+      "sha256": "7f4b26f4c90de512f9b64561cdd42cf12de6848ecd7f8594ae4efd37d9596caa",
+      "byteSize": 4874,
+      "q42Version": 3,
+      "lexicalEntries": 49,
+      "fullVerification": "passed",
+      "publicationStatus": "review-gated-local-only",
+      "knownEngineGaps": []
+    }
+  },
+  "limitation": "This product records release provenance only. It does not assert workbook/CSV/PDF observations until a reviewed source-specific semantic mapping is applied."
+}

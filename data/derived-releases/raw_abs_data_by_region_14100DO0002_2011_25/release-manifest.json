@@ -1,0 +1,48 @@
+{
+  "profile": "web-civics-q42-release/0.1.0-draft",
+  "source": {
+    "id": "raw_abs_data_by_region_14100DO0002_2011_25",
+    "datasetId": "D03-ABS-DATA-BY-REGION",
+    "publisher": "Australian Bureau of Statistics",
+    "sourceUrl": "https://www.abs.gov.au/methodologies/data-region-methodology/2011-25",
+    "referencePeriod": "2011–2025",
+    "fileName": "abs-data-by-region-14100DO0002-2011-25.xlsx",
+    "byteSize": 10501386,
+    "hash": "7146d8fa76d0179d5c2f383ec302cb5e1cab12ea604d1f64a9ee1f9c728e8595",
+    "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "retrievedAt": "2026-09-25T00:00:00Z",
+    "retrievalTimestampPrecision": "day; acquisition log records 2026-09-25 but no original clock time",
+    "licenceStatus": "Public release; licence and reuse terms require review before public redistribution.",
+    "access": "public",
+    "admission": "governance-required",
+    "parserProfile": "release-provenance/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "mappingVersion": "release-provenance/1.0.0",
+    "mappingStatus": "release-provenance-complete; observation mapping not yet reviewed",
+    "contentScope": "release-provenance-only",
+    "sourceId": "source_abs_data_by_region_14100DO0002_2011_25",
+    "volumeId": "q42_abs_data_by_region_14100DO0002_2011_25"
+  },
+  "products": {
+    "turtle": "release-provenance.ttl",
+    "canonicalNQuads": "canonical.nq",
+    "nativeCompileInput": "canonical.nq",
+    "wasmQuinPack": {
+      "receipt": "wasm-parse-receipt.json",
+      "quinCount": 29,
+      "superblocks": [
+        "wasm-superblock-000000.bin"
+      ]
+    },
+    "q42": {
+      "file": "canonical.q42",
+      "sha256": "c88bba21f02986d097ca69eb46465bfd62fea5d3c5fbe9fb1e4b33cc04824d9b",
+      "byteSize": 4957,
+      "q42Version": 3,
+      "lexicalEntries": 49,
+      "fullVerification": "passed",
+      "publicationStatus": "review-gated-local-only",
+      "knownEngineGaps": []
+    }
+  },
+  "limitation": "This product records release provenance only. It does not assert workbook/CSV/PDF observations until a reviewed source-specific semantic mapping is applied."
+}

@@ -1,0 +1,198 @@
+{
+  "profile": "web-civics-q42-release/0.1.0-draft",
+  "generatedAt": "2026-09-25T14:38:43.264Z",
+  "q42Compiler": {
+    "executable": "../qualia-27062026/target/debug/qualia-cli.exe",
+    "mode": "native-build-time",
+    "verify": true
+  },
+  "releases": [
+    {
+      "id": "raw_abs_business_counts_8165DC01_2022_26",
+      "fileName": "abs-business-counts-8165DC01-2022-26.xlsx",
+      "datasetId": "D11-ABS-BUSINESS-COUNTS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_characteristics_australian_business_2024_25",
+      "fileName": "abs-characteristics-australian-business-2024-25.zip",
+      "datasetId": "D25-ABS-BUSINESS-CHARACTERISTICS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0001_2011_25",
+      "fileName": "abs-data-by-region-14100DO0001-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0002_2011_25",
+      "fileName": "abs-data-by-region-14100DO0002-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0003_2011_25",
+      "fileName": "abs-data-by-region-14100DO0003-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0004_2011_25",
+      "fileName": "abs-data-by-region-14100DO0004-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0005_2011_25",
+      "fileName": "abs-data-by-region-14100DO0005-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0006_2011_25",
+      "fileName": "abs-data-by-region-14100DO0006-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0007_2011_25",
+      "fileName": "abs-data-by-region-14100DO0007-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0008_2011_25",
+      "fileName": "abs-data-by-region-14100DO0008-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0009_2011_25",
+      "fileName": "abs-data-by-region-14100DO0009-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_data_by_region_14100DO0010_2011_25",
+      "fileName": "abs-data-by-region-14100DO0010-2011-25.xlsx",
+      "datasetId": "D03-ABS-DATA-BY-REGION",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_estimating_homelessness_2021_lga",
+      "fileName": "abs-estimating-homelessness-2021-lga.xlsx",
+      "datasetId": "D15-ABS-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_estimating_homelessness_2021_national",
+      "fileName": "abs-estimating-homelessness-2021-national.xlsx",
+      "datasetId": "D15-ABS-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_estimating_homelessness_2021_sa2_sa3_sa4",
+      "fileName": "abs-estimating-homelessness-2021-sa2-sa3-sa4.xlsx",
+      "datasetId": "D15-ABS-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_overseas_arrivals_departures_july_2026",
+      "fileName": "abs-overseas-arrivals-departures-july-2026.zip",
+      "datasetId": "D09-ABS-OAD",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_quarterly_tourism_filled_jobs_june_2026",
+      "fileName": "abs-quarterly-tourism-filled-jobs-june-2026.xlsx",
+      "datasetId": "D10-TRA-TOURISM-LABOUR",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_quarterly_tourism_labour_statistics_june_2026",
+      "fileName": "abs-quarterly-tourism-labour-statistics-june-2026.zip",
+      "datasetId": "D10-TRA-TOURISM-LABOUR",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_quarterly_tourism_main_jobs_june_2026",
+      "fileName": "abs-quarterly-tourism-main-jobs-june-2026.xlsx",
+      "datasetId": "D10-TRA-TOURISM-LABOUR",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_abs_retirement_and_retirement_intentions_2024_25",
+      "fileName": "abs-retirement-and-retirement-intentions-2024-25.zip",
+      "datasetId": "D21-ABS-RETIREMENT-WEALTH",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_aihw_family_domestic_sexual_violence_all_data_2026",
+      "fileName": "aihw-family-domestic-sexual-violence-all-data-2026.xlsx",
+      "datasetId": "D33-AIHW-FDSV",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_aihw_shs_monthly_june_2026",
+      "fileName": "aihw-shs-monthly-june-2026.xlsx",
+      "datasetId": "D14-AIHW-SHS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_education_higher_education_all_students_2024",
+      "fileName": "education-higher-education-all-students-2024.xlsx",
+      "datasetId": "D05-HESSC",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_home_affairs_working_holiday_maker_report_june_2025",
+      "fileName": "home-affairs-working-holiday-maker-report-june-2025.pdf",
+      "datasetId": "D07-HOME-AFFAIRS-WHM",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_jsa_internet_vacancies_anzsco2_sa4_august_2026",
+      "fileName": "jsa-internet-vacancies-anzsco2-sa4-august-2026.xlsx",
+      "datasetId": "D17-JSA-OCCUPATIONS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_homelessness_services_data_tables",
+      "fileName": "pc-rogs-2026-homelessness-services-data-tables.xlsx",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_homelessness_services_dataset",
+      "fileName": "pc-rogs-2026-homelessness-services-dataset.csv",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_housing_data_tables",
+      "fileName": "pc-rogs-2026-housing-data-tables.xlsx",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_housing_dataset",
+      "fileName": "pc-rogs-2026-housing-dataset.csv",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_housing_homelessness_overview_data_tables",
+      "fileName": "pc-rogs-2026-housing-homelessness-overview-data-tables.xlsx",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    },
+    {
+      "id": "raw_pc_rogs_2026_housing_homelessness_overview_dataset",
+      "fileName": "pc-rogs-2026-housing-homelessness-overview-dataset.csv",
+      "datasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS",
+      "q42": "canonical.q42"
+    }
+  ],
+  "nextStage": "Review a source-specific mapping and emit observation-level RDF/Q42; do not infer spreadsheet columns from headers alone."
+}

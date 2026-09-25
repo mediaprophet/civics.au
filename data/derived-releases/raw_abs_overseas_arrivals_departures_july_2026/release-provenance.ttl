@@ -1,0 +1,39 @@
+@prefix c: <https://civics.au/ns/evaluation#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Canonical N-Quads is the compilation input. This audit view is release provenance only.
+# A reviewed table/row/cell mapping is required before observations are emitted.
+
+# Release: raw_abs_overseas_arrivals_departures_july_2026; source SHA-256: be5ceded0887a5835ff3e2749198b87dc6e2fc2ad69be6cb754f1570f2934449
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#DatasetRelease> .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <http://purl.org/dc/terms/publisher> "Australian Bureau of Statistics" .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#catalogueId> "D09-ABS-OAD" .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#referencePeriod> "July 2026" .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#licenceStatus> "Public release; licence and reuse terms require review before public redistribution." .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#hasAccessClass> <https://civics.au/ns/evaluation#Public> .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#hasAdmissionState> <https://civics.au/ns/evaluation#GovernanceRequired> .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#hasSourceArtifact> <https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#hasContentScope> <https://civics.au/ns/evaluation#ReleaseProvenanceOnly> .
+<https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/ns/prov#wasDerivedFrom> <https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#SourceArtifact> .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/ns/dcat#downloadURL> <https://www.abs.gov.au/statistics/industry/tourism-and-transport/overseas-arrivals-and-departures-australia/jul-2026> .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#sourceUrl> <https://www.abs.gov.au/statistics/industry/tourism-and-transport/overseas-arrivals-and-departures-australia/jul-2026> .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#sourceFileName> "abs-overseas-arrivals-departures-july-2026.zip" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#mediaType> "application/zip" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#byteSize> "3237597" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#sha256> "be5ceded0887a5835ff3e2749198b87dc6e2fc2ad69be6cb754f1570f2934449" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#retrievedAt> "2026-09-25T00:00:00Z" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#retrievalTimestampPrecision> "day; acquisition log records 2026-09-25 but no original clock time" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#parserProfile> "release-provenance/application/zip" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#mappingVersion> "release-provenance/1.0.0" .
+<https://civics.au/source-artifacts/source_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#mappingStatus> "release-provenance-complete; observation mapping not yet reviewed" .
+<https://civics.au/semantic-mappings/raw_abs_overseas_arrivals_departures_july_2026/release-provenance-1.0.0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#SemanticMapping> .
+<https://civics.au/semantic-mappings/raw_abs_overseas_arrivals_departures_july_2026/release-provenance-1.0.0> <https://civics.au/ns/evaluation#mappingVersion> "release-provenance/1.0.0" .
+<https://civics.au/semantic-mappings/raw_abs_overseas_arrivals_departures_july_2026/release-provenance-1.0.0> <https://civics.au/ns/evaluation#mappingStatus> "release-provenance-complete; observation mapping not yet reviewed" .
+<https://civics.au/q42/q42_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://civics.au/ns/evaluation#Q42Volume> .
+<https://civics.au/q42/q42_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#mediaType> "application/q42" .
+<https://civics.au/q42/q42_abs_overseas_arrivals_departures_july_2026> <https://civics.au/ns/evaluation#q42FormatVersion> "3" .
+<https://civics.au/q42/q42_abs_overseas_arrivals_departures_july_2026> <http://www.w3.org/ns/prov#wasDerivedFrom> <https://civics.au/dataset-releases/raw_abs_overseas_arrivals_departures_july_2026> .

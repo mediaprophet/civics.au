@@ -48,6 +48,12 @@ The site is organised into two audience tracks — *For participants* (citizens 
 
 No external package installation is required; scripts run with Node.js built-ins.
 
+## Economic evaluation implementation planning
+
+The [decision evidence implementation plan](docs/plans/decision-evidence/README.md) sets out the QualiaDB `wasm-logic` direction, RDF-to-Q42 data pipeline, economic/technical/social evaluation methods, reproducible reports, dataset programme and staged acceptance criteria. The [discovery record](docs/plans/decision-evidence/06-discovery-record.md) distinguishes tested behaviour from planned capabilities.
+
+Read-only discovery checks: `node scripts/evidence-audit.mjs` and `node --test scripts/evidence-audit.test.mjs`. The audit preserves workbook evidence statuses as reported; it does not independently verify the cited claims.
+
 ## GitHub Pages Deployment
 
 The site is published to GitHub Pages via GitHub Actions:

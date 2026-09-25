@@ -1,0 +1,48 @@
+{
+  "profile": "web-civics-q42-release/0.1.0-draft",
+  "source": {
+    "id": "raw_aihw_family_domestic_sexual_violence_all_data_2026",
+    "datasetId": "D33-AIHW-FDSV",
+    "publisher": "Australian Institute of Health and Welfare",
+    "sourceUrl": "https://www.aihw.gov.au/family-domestic-and-sexual-violence",
+    "referencePeriod": "2026 release",
+    "fileName": "aihw-family-domestic-sexual-violence-all-data-2026.xlsx",
+    "byteSize": 966551,
+    "hash": "d822a928d03fccd6ec1b6b970099e2e0f1b309e666c9d9636e87537ef53195b5",
+    "mediaType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "retrievedAt": "2026-09-25T00:00:00Z",
+    "retrievalTimestampPrecision": "day; acquisition log records 2026-09-25 but no original clock time",
+    "licenceStatus": "Public release; licence and reuse terms require review before public redistribution.",
+    "access": "public",
+    "admission": "governance-required",
+    "parserProfile": "release-provenance/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "mappingVersion": "release-provenance/1.0.0",
+    "mappingStatus": "release-provenance-complete; observation mapping not yet reviewed",
+    "contentScope": "release-provenance-only",
+    "sourceId": "source_aihw_family_domestic_sexual_violence_all_data_2026",
+    "volumeId": "q42_aihw_family_domestic_sexual_violence_all_data_2026"
+  },
+  "products": {
+    "turtle": "release-provenance.ttl",
+    "canonicalNQuads": "canonical.nq",
+    "nativeCompileInput": "canonical.nq",
+    "wasmQuinPack": {
+      "receipt": "wasm-parse-receipt.json",
+      "quinCount": 29,
+      "superblocks": [
+        "wasm-superblock-000000.bin"
+      ]
+    },
+    "q42": {
+      "file": "canonical.q42",
+      "sha256": "dae5d29e1b7b3ebdc1e08417f350d9bb46646efa6b052864a9243f1120ace5a9",
+      "byteSize": 5009,
+      "q42Version": 3,
+      "lexicalEntries": 49,
+      "fullVerification": "passed",
+      "publicationStatus": "review-gated-local-only",
+      "knownEngineGaps": []
+    }
+  },
+  "limitation": "This product records release provenance only. It does not assert workbook/CSV/PDF observations until a reviewed source-specific semantic mapping is applied."
+}

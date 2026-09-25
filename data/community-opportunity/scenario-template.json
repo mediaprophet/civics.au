@@ -1,0 +1,151 @@
+{
+  "$schema": "https://civics.au/ns/evaluation/community-opportunity-v1.json",
+  "modelVersion": "0.1.0",
+  "scenario": {
+    "id": "replace_with_stable_scenario_id",
+    "town": {
+      "id": "replace_with_geography_id",
+      "name": "Replace with town or community name",
+      "geographyVersion": "ASGS or locally governed boundary version",
+      "contextEvidence": ["D03-ABS-DATA-BY-REGION", "D04-ABS-SEIFA", "D17-JSA-OCCUPATIONS", "D18-CREATIVE-AUSTRALIA", "D22-LOCAL-EVIDENCE"],
+      "contextLimitations": ["Area statistics provide context only and do not identify an individual or establish demand."],
+      "contextIndicators": [
+        {"id": "population", "domain": "demographics", "label": "Resident population", "value": null, "unit": "persons", "referencePeriod": "YYYY", "sourceDatasetId": "D03-ABS-DATA-BY-REGION", "limitation": "Replace with an exact release and geography; this is context, not a demand estimate."},
+        {"id": "housing", "domain": "housing", "label": "Local housing context", "value": null, "unit": "defined-by-release", "referencePeriod": "YYYY", "sourceDatasetId": "D03-ABS-DATA-BY-REGION", "limitation": "Do not infer an individual's housing need from an area measure."},
+        {"id": "labour", "domain": "labour", "label": "Local workforce or occupation context", "value": null, "unit": "defined-by-release", "referencePeriod": "YYYY", "sourceDatasetId": "D17-JSA-OCCUPATIONS", "limitation": "Employment measures do not show a local opportunity or a contributor's availability."},
+        {"id": "culture", "domain": "culture", "label": "Local cultural activity or host context", "value": null, "unit": "defined-by-local-method", "referencePeriod": "YYYY", "sourceDatasetId": "D22-LOCAL-EVIDENCE", "limitation": "A locally governed method and consent are required; do not infer cultural demand from population size."}
+      ],
+      "innovationInfrastructure": {
+        "evidence": ["D25-ABS-BUSINESS-CHARACTERISTICS", "D22-LOCAL-EVIDENCE"],
+        "facilities": ["work space", "reliable power", "connectivity", "tools/equipment", "test setting", "data stewardship", "local partnerships", "maintenance capacity"],
+        "assessment": "Document what already exists, what is accessible, what is missing, and who governs each resource. National business statistics are context only."
+      },
+      "digitalEconomy": {
+        "evidence": ["D25-ABS-BUSINESS-CHARACTERISTICS", "D26-SOLID-INTEROPERABILITY", "D27-LOCAL-DIGITAL-COMMERCE-INVENTORY"],
+        "localProviderInventory": "Map only providers who consent to inclusion, their categories, discovery paths, booking/ordering capabilities, accessibility and update process.",
+        "systems": ["online storefront", "inventory management", "service catalogue", "booking/itinerary exchange", "optional local credential"],
+        "interoperability": {"referenceImplementation": "Solid Databox Webcivics", "specification": "Solid/CSS profile version to be recorded", "implementationProfile": "Databox program and IPMS module profile to be recorded", "conformanceEvidence": "implementation test and independent external interoperability result to be recorded"},
+        "assessment": "Measure available local systems, external-platform fees/terms where voluntarily supplied, discovery gaps, accessibility and operational support. Do not assume any platform is present or that replacement produces a saving."
+      },
+      "energyResilience": {
+        "evidence": ["D02-BOM-CLIMATE", "D23-SITE-OPERATIONS", "D28-AEMO-DER", "D29-AER-METERING-CUSTOMER-PROTECTION", "D30-AIDR-DISASTER-RECOVERY"],
+        "participatingSiteTypes": ["community ground", "supermarket", "school", "council facility", "community service"],
+        "assessment": "Inventory consented sites, their existing supply arrangements, measured interval demand, critical loads, local generation/storage, network constraints, hazards and service roles. Do not infer energy needs or emergency capacity from building type."
+      },
+      "housingSystem": {
+        "evidence": ["D31-AIHW-HOUSING-ASSISTANCE", "D32-PC-ROGS-HOUSING-HOMELESSNESS", "D14-AIHW-SHS"],
+        "measures": ["social housing dwellings", "social housing households", "waitlist households", "greatest-need waitlist households", "allocations", "service capacity"],
+        "assessment": "Keep each published measure, geography, period, programme definition and limitation separate. Do not subtract them into a single shortfall."
+      }
+    },
+    "opportunity": {
+      "id": "replace_with_opportunity_id",
+      "title": "Example: locally programmed music night at a consenting venue",
+      "type": "cultural-programming",
+      "period": {"start": "YYYY-MM-DD", "end": "YYYY-MM-DD"},
+      "host": "Named host only after it has consented to publication",
+      "needStatement": "A locally authored statement of the opportunity, benefit sought and constraints.",
+      "needEvidence": ["D22-LOCAL-EVIDENCE"],
+      "contributorPathway": "P29",
+      "contribution": "A defined, voluntary and time-bounded activity. Do not state or infer a contributor's private circumstances.",
+      "terms": {
+        "paymentStatus": "to-be-agreed",
+        "contributorPaymentAud": null,
+        "contributorExpensesReimbursedAud": null,
+        "localSupplierSpendAud": null,
+        "incrementalHostRevenueAud": null,
+        "hostDeliveryCostAud": null,
+        "publicFundingAud": null
+      }
+    },
+    "outcomes": {
+      "economic": ["Record only measured incremental revenue, costs and local supplier payments; do not apply a multiplier without a reviewed method."],
+      "socialCultural": ["Define participant, host and community outcomes with local people before the activity."],
+      "capability": ["Define skills, continuity, local connection or future activity outcomes without promising them in advance."]
+    },
+    "innovation": {
+      "communityLeadOrganisation": "Replace with the existing community group, cooperative, business, school, service or other local entity that leads the work.",
+      "localProblemStatement": "A locally authored problem or opportunity that RD&D will investigate.",
+      "activityStage": "research",
+      "existingInitiativesEvidence": ["D22-LOCAL-EVIDENCE"],
+      "supportingPathways": ["P20", "P21", "P29", "P30"],
+      "infrastructureNeeds": ["Specify the infrastructure resources requested and their limits."],
+      "benefitSharingTerms": "Define ownership, maintenance, access, local benefit and how visitors are recognised or paid.",
+      "dataAndIpGovernance": "Define consent, access, retention, publication, IP and culturally appropriate governance before work starts.",
+      "safeguards": {
+        "communityMandate": false,
+        "existingInitiativesMapped": false,
+        "fairContributionTerms": false,
+        "dataAndIpGovernanceAgreed": false,
+        "safetyAndRegulatoryPlan": false,
+        "maintenanceAndExitPlan": false
+      }
+    },
+    "digitalEconomy": {
+      "communityLeadOrganisation": "Replace with the local entity accountable for the service.",
+      "localNeedStatement": "A locally authored retail, service, tourism discovery, booking, inventory or credential problem statement.",
+      "serviceInventoryEvidence": ["D27-LOCAL-DIGITAL-COMMERCE-INVENTORY"],
+      "systems": ["online storefront", "inventory management", "service catalogue", "booking/itinerary exchange", "optional local credential"],
+      "solidCompatibility": {"referenceImplementation": "Solid Databox Webcivics", "specification": "record exact version", "implementationProfile": "record Databox program and IPMS module profile", "conformanceEvidence": "record implementation test and independent external result"},
+      "economics": {"baselineExternalPlatformCostAud": null, "proposedLocalOperatingCostAud": null, "implementationCostAud": null, "consentedProvidersListed": null, "providersWithOnlineShop": null, "providersWithInventoryIntegration": null, "itineraryReadyProviders": null},
+      "credentialPolicy": "If a locals discount credential is proposed, define eligibility, issuer, verifier, minimum data, consent, offline/accessibility alternative, complaints, retention and appeals.",
+      "safeguards": {
+        "communityMandate": false,
+        "merchantAndProviderConsent": false,
+        "interoperabilityConformanceRecorded": false,
+        "dataRightsAndSecurityAgreed": false,
+        "fairCompetitionAndFeeReview": false,
+        "credentialPrivacyAndAccessPolicy": false,
+        "operatingAndExitPlan": false
+      }
+    },
+    "energyResilience": {
+      "communityLeadOrganisation": "Replace with the local entity accountable for the programme.",
+      "participatingSiteEvidence": ["D23-SITE-OPERATIONS"],
+      "criticalLoadEvidence": ["D23-SITE-OPERATIONS"],
+      "microgridScope": "State whether this is site-only resilience, multi-site coordination, an embedded network, or another jurisdiction-approved arrangement.",
+      "meteringBilling": "Record the proposed meter, data, retailer/exempt-seller/market, tariff, billing, dispute and exit arrangement after qualified review.",
+      "energyEconomics": {"baselineEnergyCostAud": null, "projectedEnergyCostAud": null, "capitalCostAud": null, "annualOperatingCostAud": null, "measuredCriticalLoadHours": null},
+      "resilienceHub": {"hazardEvidence": ["D30-AIDR-DISASTER-RECOVERY"], "serviceRoles": ["communications", "charging", "coordination", "information", "support referral"], "recoverySupport": "Define what can safely be offered during response and recovery, who coordinates it and when specialist accommodation, health or emergency services take precedence."},
+      "safeguards": {
+        "participantSiteAgreements": false,
+        "jurisdictionAndRegulatoryReview": false,
+        "meteringAccuracyAndDataGovernance": false,
+        "customerProtectionAndDisputePlan": false,
+        "engineeringAndNetworkApproval": false,
+        "criticalLoadAndIslandingTest": false,
+        "emergencyAgencyCoordination": false,
+        "accessibilityAndSpecialistReferralPlan": false,
+        "maintenanceAndRecoveryExercisePlan": false
+      }
+    },
+    "housingPathways": {
+      "housingSystemEvidence": ["D31-AIHW-HOUSING-ASSISTANCE", "D32-PC-ROGS-HOUSING-HOMELESSNESS", "D14-AIHW-SHS"],
+      "systemMeasures": [{"id": "social-housing-dwellings", "value": null, "unit": "dwellings", "referencePeriod": "YYYY", "sourceDatasetId": "D31-AIHW-HOUSING-ASSISTANCE", "limitation": "Replace with a release-specific local measure; a dwelling count is not a count of available places or unmet need."}],
+      "caseCostRecords": [{"id": "service-cost-example", "caseType": "define specific programme/cohort", "valueAud": null, "unit": "AUD per defined unit", "referencePeriod": "YYYY", "priceYear": "YYYY", "perspective": "government | provider | participant", "sourceDatasetId": "D32-PC-ROGS-HOUSING-HOMELESSNESS", "limitation": "Define cohort, included resources and comparability; do not use this as a universal individual cost."}],
+      "highNeedPathways": ["High-support housing and specialist pathways may be needed for people with complex health/substance-use support, palliative or hospital discharge needs, aged-care/disability support, staffed youth accommodation or justice transition. Determine fit through responsible specialist services."],
+      "earlyIntervention": "Define a voluntary pathway for people whose independently assessed needs can be safely met through community grounds plus agreed supports. The intended reduction in demand is a hypothesis to test, not an eligibility filter or a housing-allocation rule.",
+      "siteSafety": "Plan prevention, clear expectations, resident voice, trained support, restorative/complaints pathways, incident records and immediate emergency escalation. Do not treat fewer police call-outs as success if people cannot report harm or seek help.",
+      "safeguards": {
+        "housingAuthorityAndServiceConsultation": false,
+        "independentSuitabilityAndReferralProtocol": false,
+        "specialistPathwaysAndDischargeCoordination": false,
+        "caseCostDefinitionAndPriceBasis": false,
+        "overlapAndDoubleCountingReview": false,
+        "noDisplacementOfHigherNeedHousing": false,
+        "siteSafeguardingAndResidentVoice": false,
+        "emergencyResponseAndPoliceEscalationProtocol": false,
+        "outcomeAndAdverseEffectMeasurementPlan": false
+      }
+    },
+    "safeguards": {
+      "hostAgreement": false,
+      "fairTerms": false,
+      "localConsultation": false,
+      "localWorkerImpactReviewed": false,
+      "safetyAndAccessibilityPlan": false,
+      "privacyAndPublicityConsent": false,
+      "accommodationAndExitPlan": false
+    }
+  }
+}

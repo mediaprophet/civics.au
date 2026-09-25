@@ -1,0 +1,183 @@
+@prefix c: <https://civics.au/ns/evaluation#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://civics.au/ns/evaluation> a <http://www.w3.org/2002/07/owl#Ontology> ;
+  dct:title "Civics decision-evidence ontology" ;
+  dct:description "Versioned provenance and evaluation vocabulary for decision cases. This ontology represents evidence and limitations separately from model admission and conclusions." ;
+  dct:created "2026-09-25"^^xsd:date ;
+  dct:hasVersion "0.1.0" .
+
+## Classes
+
+c:EvaluationCase a rdfs:Class ; rdfs:label "evaluation case" ; rdfs:subClassOf prov:Entity .
+c:Option a rdfs:Class ; rdfs:label "option" ; rdfs:subClassOf prov:Entity .
+c:Scenario a rdfs:Class ; rdfs:label "scenario" ; rdfs:subClassOf skos:Concept .
+c:ServicePathway a rdfs:Class ; rdfs:label "service pathway" ; rdfs:subClassOf c:Scenario .
+c:DatasetRecord a rdfs:Class ; rdfs:label "dataset catalogue record" ; rdfs:comment "A source-family catalogue record. It is not an ingested release." .
+c:DatasetRelease a rdfs:Class ; rdfs:label "dataset release" ; rdfs:subClassOf dcat:Dataset, prov:Entity .
+c:SourceArtifact a rdfs:Class ; rdfs:label "source artifact" ; rdfs:comment "An immutable acquired source file. It may be a workbook, archive, CSV, PDF or semantic document and is not itself a set of admitted observations." ; rdfs:subClassOf dcat:Distribution, prov:Entity .
+c:TransformationRun a rdfs:Class ; rdfs:label "transformation run" ; rdfs:comment "A reproducible activity that maps a source artifact into semantic products. A provenance-only run does not claim that source tables have been semantically mapped." ; rdfs:subClassOf prov:Activity .
+c:Q42Volume a rdfs:Class ; rdfs:label "Q42 volume" ; rdfs:comment "A version-3 Qualia Q42 semantic volume derived from a canonical RDF product." ; rdfs:subClassOf prov:Entity .
+c:SemanticMapping a rdfs:Class ; rdfs:label "semantic mapping" ; rdfs:comment "A versioned, reviewable declaration of how source fields become ontology terms." ; rdfs:subClassOf prov:Plan .
+c:Observation a rdfs:Class ; rdfs:label "observation" ; rdfs:subClassOf prov:Entity .
+c:Indicator a rdfs:Class ; rdfs:label "indicator" ; rdfs:subClassOf skos:Concept .
+c:EvidenceArtifact a rdfs:Class ; rdfs:label "evidence artifact" ; rdfs:subClassOf prov:Entity .
+c:EvidenceRecord a rdfs:Class ; rdfs:label "reported evidence record" ; rdfs:subClassOf prov:Entity .
+c:RestrictedCaseEvidence a rdfs:Class ; rdfs:label "restricted case evidence" ; rdfs:subClassOf c:EvidenceArtifact .
+c:EvidenceAssessment a rdfs:Class ; rdfs:label "evidence assessment" ; rdfs:subClassOf prov:Activity .
+c:ModelAdmission a rdfs:Class ; rdfs:label "model admission decision" ; rdfs:subClassOf prov:Activity .
+c:Parameter a rdfs:Class ; rdfs:label "parameter" ; rdfs:subClassOf prov:Entity .
+c:MethodPack a rdfs:Class ; rdfs:label "method pack" ; rdfs:subClassOf prov:Entity .
+c:Constraint a rdfs:Class ; rdfs:label "constraint" ; rdfs:subClassOf prov:Entity .
+c:Outcome a rdfs:Class ; rdfs:label "outcome" ; rdfs:subClassOf prov:Entity .
+c:Valuation a rdfs:Class ; rdfs:label "valuation" ; rdfs:subClassOf prov:Entity .
+c:Calculation a rdfs:Class ; rdfs:label "calculation" ; rdfs:subClassOf prov:Activity .
+c:EvaluationRun a rdfs:Class ; rdfs:label "evaluation run" ; rdfs:subClassOf prov:Activity .
+c:Claim a rdfs:Class ; rdfs:label "claim" ; rdfs:subClassOf prov:Entity .
+c:Decision a rdfs:Class ; rdfs:label "decision" ; rdfs:subClassOf prov:Activity .
+c:ReportRelease a rdfs:Class ; rdfs:label "report release" ; rdfs:subClassOf prov:Entity .
+c:AccessClass a rdfs:Class ; rdfs:label "access class" ; rdfs:subClassOf skos:Concept .
+c:AdmissionState a rdfs:Class ; rdfs:label "admission state" ; rdfs:subClassOf skos:Concept .
+c:EvidenceState a rdfs:Class ; rdfs:label "evidence state" ; rdfs:subClassOf skos:Concept .
+
+## Object properties
+
+c:aboutScenario a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range c:Scenario .
+c:aboutCase a rdfs:Property ; rdfs:range c:EvaluationCase .
+c:compares a rdfs:Property ; rdfs:domain c:EvaluationRun ; rdfs:range c:Option .
+c:hasIndicator a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range c:Indicator .
+c:hasAssessment a rdfs:Property ; rdfs:domain c:EvidenceArtifact ; rdfs:range c:EvidenceAssessment .
+c:hasAdmission a rdfs:Property ; rdfs:domain c:Parameter ; rdfs:range c:ModelAdmission .
+c:hasAccessClass a rdfs:Property ; rdfs:range c:AccessClass .
+c:hasAdmissionState a rdfs:Property ; rdfs:range c:AdmissionState .
+c:hasEvidenceState a rdfs:Property ; rdfs:range c:EvidenceState .
+c:hasConstraint a rdfs:Property ; rdfs:domain c:Option ; rdfs:range c:Constraint .
+c:measures a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range c:Indicator .
+c:usesDatasetRelease a rdfs:Property ; rdfs:domain c:EvaluationRun ; rdfs:range c:DatasetRelease .
+c:usesParameter a rdfs:Property ; rdfs:domain c:Calculation ; rdfs:range c:Parameter .
+c:producesOutcome a rdfs:Property ; rdfs:domain c:Calculation ; rdfs:range c:Outcome .
+c:valuesOutcome a rdfs:Property ; rdfs:domain c:Valuation ; rdfs:range c:Outcome .
+c:hasValuation a rdfs:Property ; rdfs:domain c:Outcome ; rdfs:range c:Valuation .
+c:supportsClaim a rdfs:Property ; rdfs:range c:Claim .
+c:qualifiesClaim a rdfs:Property ; rdfs:range c:Claim .
+c:hasCounterevidence a rdfs:Property ; rdfs:range c:EvidenceArtifact .
+c:dependsOn a rdfs:Property ; rdfs:range prov:Entity .
+c:derivedIn a rdfs:Property ; rdfs:range c:EvaluationRun .
+c:hasReport a rdfs:Property ; rdfs:domain c:EvaluationRun ; rdfs:range c:ReportRelease .
+c:hasSourceArtifact a rdfs:Property ; rdfs:domain c:DatasetRelease ; rdfs:range c:SourceArtifact .
+c:usesSemanticMapping a rdfs:Property ; rdfs:domain c:TransformationRun ; rdfs:range c:SemanticMapping .
+c:generatedVolume a rdfs:Property ; rdfs:domain c:TransformationRun ; rdfs:range c:Q42Volume .
+c:hasTransformationRun a rdfs:Property ; rdfs:domain c:DatasetRelease ; rdfs:range c:TransformationRun .
+c:hasContentScope a rdfs:Property ; rdfs:range skos:Concept .
+
+## Data properties
+
+c:catalogueId a rdfs:Property ; rdfs:domain c:DatasetRecord ; rdfs:range xsd:string .
+c:sourceUrl a rdfs:Property ; rdfs:range xsd:anyURI .
+c:sourceLocator a rdfs:Property ; rdfs:range xsd:string .
+c:publisherName a rdfs:Property ; rdfs:range xsd:string .
+c:retrievedAt a rdfs:Property ; rdfs:range xsd:dateTime .
+c:referencePeriod a rdfs:Property ; rdfs:range xsd:string .
+c:geographyVersion a rdfs:Property ; rdfs:range xsd:string .
+c:coverageNote a rdfs:Property ; rdfs:range xsd:string .
+c:refreshCadence a rdfs:Property ; rdfs:range xsd:string .
+c:licenceStatus a rdfs:Property ; rdfs:range xsd:string .
+c:sha256 a rdfs:Property ; rdfs:range xsd:string .
+c:schemaVersion a rdfs:Property ; rdfs:range xsd:string .
+c:mappingVersion a rdfs:Property ; rdfs:range xsd:string .
+c:originalValue a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range xsd:string .
+c:numericValue a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range xsd:decimal .
+c:unit a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range xsd:string .
+c:denominator a rdfs:Property ; rdfs:domain c:Observation ; rdfs:range xsd:string .
+c:methodNote a rdfs:Property ; rdfs:range xsd:string .
+c:limitation a rdfs:Property ; rdfs:range xsd:string .
+c:qualification a rdfs:Property ; rdfs:range xsd:string .
+c:reviewDue a rdfs:Property ; rdfs:range xsd:date .
+c:priceYear a rdfs:Property ; rdfs:range xsd:gYear .
+c:currency a rdfs:Property ; rdfs:range xsd:string .
+c:effectiveFrom a rdfs:Property ; rdfs:range xsd:date .
+c:effectiveTo a rdfs:Property ; rdfs:range xsd:date .
+c:retentionClass a rdfs:Property ; rdfs:range xsd:string .
+c:intendedUse a rdfs:Property ; rdfs:range xsd:string .
+c:feedsPack a rdfs:Property ; rdfs:range xsd:string .
+c:declaredObservationType a rdfs:Property ; rdfs:range xsd:string .
+c:geography a rdfs:Property ; rdfs:domain c:Observation .
+c:sourceFileName a rdfs:Property ; rdfs:domain c:SourceArtifact ; rdfs:range xsd:string .
+c:mediaType a rdfs:Property ; rdfs:range xsd:string .
+c:byteSize a rdfs:Property ; rdfs:range xsd:integer .
+c:retrievalTimestampPrecision a rdfs:Property ; rdfs:range xsd:string .
+c:sourceReleaseDate a rdfs:Property ; rdfs:range xsd:date .
+c:parserProfile a rdfs:Property ; rdfs:range xsd:string .
+c:mappingStatus a rdfs:Property ; rdfs:range xsd:string .
+c:q42FormatVersion a rdfs:Property ; rdfs:range xsd:integer .
+c:q42VerificationLevel a rdfs:Property ; rdfs:range xsd:string .
+c:generatedAt a rdfs:Property ; rdfs:range xsd:dateTime .
+
+## Controlled concepts
+
+c:Candidate a c:AdmissionState ; skos:prefLabel "candidate source" .
+c:Staged a c:AdmissionState ; skos:prefLabel "staged" .
+c:GovernanceRequired a c:AdmissionState ; skos:prefLabel "governance required" .
+c:ApprovedForUse a c:AdmissionState ; skos:prefLabel "approved for specified use" .
+c:Rejected a c:AdmissionState ; skos:prefLabel "rejected" .
+c:Superseded a c:AdmissionState ; skos:prefLabel "superseded" .
+c:DirectCount a c:EvidenceState ; skos:prefLabel "direct count" .
+c:RelevantProxy a c:EvidenceState ; skos:prefLabel "relevant proxy" .
+c:ContextOnly a c:EvidenceState ; skos:prefLabel "context only" .
+c:LocalPrimaryResearchRequired a c:EvidenceState ; skos:prefLabel "local primary research required" .
+c:NotAppropriateToCount a c:EvidenceState ; skos:prefLabel "not appropriate to count" .
+c:Public a c:AccessClass ; skos:prefLabel "public" .
+c:ProjectInternal a c:AccessClass ; skos:prefLabel "project internal" .
+c:Restricted a c:AccessClass ; skos:prefLabel "restricted" .
+c:ReleaseProvenanceOnly a skos:Concept ; skos:prefLabel "release provenance only" ; skos:definition "The derived semantic product describes the source release and transformation, but does not yet express source rows, cells or observations." .
+c:MappedObservations a skos:Concept ; skos:prefLabel "mapped observations" ; skos:definition "The derived semantic product includes source observations mapped by a reviewed semantic mapping." .
+
+## Normative modelling notes
+
+c:DatasetRecord rdfs:comment "Catalogue records cannot be used as evidence in a calculation. Create a DatasetRelease with retrieval details, source hash, licence review and a reviewed mapping first." .
+c:Observation rdfs:comment "Retain the source locator, original value, unit, period, geography, denominator and method. Missing or suppressed values remain missing." .
+c:RestrictedCaseEvidence rdfs:comment "Keep consent-bound case evidence in a restricted graph or Q42 volume. It must not be joined with public data to infer a person or to create an eligibility/risk score." .
+c:ModelAdmission rdfs:comment "Admission is scoped to an input and use. A source may be credible context but inadmissible as a local causal or monetary estimate." .
+c:SourceArtifact rdfs:comment "Preserve the unaltered source artifact, official release URL, retrieved-at precision, content hash, media type and byte size. Do not treat a provenance-only Q42 volume as a semantic conversion of workbook cells." .
+
+## Shapes used by the catalogue compiler and release workflow
+
+c:DatasetReleaseShape a sh:NodeShape ;
+  sh:targetClass c:DatasetRelease ;
+  sh:property [ sh:path dct:publisher ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:sourceUrl ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:retrievedAt ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:sha256 ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:schemaVersion ; sh:minCount 1 ] .
+
+c:ObservationShape a sh:NodeShape ;
+  sh:targetClass c:Observation ;
+  sh:property [ sh:path c:hasIndicator ; sh:minCount 1 ] ;
+  sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:sourceLocator ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:referencePeriod ; sh:minCount 1 ] .
+
+c:SourceArtifactShape a sh:NodeShape ;
+  sh:targetClass c:SourceArtifact ;
+  sh:property [ sh:path c:sourceFileName ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:sourceUrl ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:sha256 ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:mediaType ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:byteSize ; sh:minCount 1 ] .
+
+c:Q42VolumeShape a sh:NodeShape ;
+  sh:targetClass c:Q42Volume ;
+  sh:property [ sh:path c:sha256 ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:q42FormatVersion ; sh:minCount 1 ] ;
+  sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ] .
+
+c:ParameterShape a sh:NodeShape ;
+  sh:targetClass c:Parameter ;
+  sh:property [ sh:path c:hasAdmission ; sh:minCount 1 ] ;
+  sh:property [ sh:path c:unit ; sh:minCount 1 ] .

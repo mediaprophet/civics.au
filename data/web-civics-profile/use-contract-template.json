@@ -1,0 +1,15 @@
+{
+  "$schema": "./use-contract.schema.json",
+  "id": "use-abs-data-by-region-example",
+  "datasetId": "D03-ABS-DATA-BY-REGION",
+  "releaseId": "required-at-publication",
+  "purpose": "Describe regional baseline context for a named evaluation case.",
+  "indicators": [{"id": "required-indicator-iri", "definition": "Publisher definition retained with release", "unit": "required", "geography": "required", "period": "required", "evidenceState": "context-only-or-reviewed"}],
+  "permittedUses": ["place baseline", "scenario parameter with documented applicability", "report chart with source attribution"],
+  "prohibitedUses": ["individual inference", "eligibility or priority scoring", "local causal claim without additional evidence"],
+  "queries": [{"id": "regional-baseline", "parameters": ["geography", "period", "indicator"], "result": "observations with provenance and limitations"}],
+  "modelInputs": [{"name": "baseline parameter", "admission": "reviewed per case", "uncertainty": "required"}],
+  "reportRequirements": ["publisher", "release identifier", "reference period", "unit", "geography", "limitations", "run receipt"],
+  "retention": "Follow source licence and project evidence-retention policy.",
+  "review": {"owner": "named data steward", "reviewDue": "YYYY-MM-DD"}
+}

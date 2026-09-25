@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Web Civics profile manifest",
+  "type": "object",
+  "required": ["profileId", "version", "runtime", "formats", "inputs", "outputs", "admissionMinimum"],
+  "properties": {
+    "profileId": {"type": "string", "format": "uri"},
+    "version": {"type": "string"},
+    "runtime": {"type": "object", "required": ["engine", "profileModes", "requiredCapabilities"]},
+    "formats": {"type": "object", "required": ["semanticInput", "canonicalEvidenceHash", "ordinaryApplicationData"]},
+    "inputs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "outputs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "admissionMinimum": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}

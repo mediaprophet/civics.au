@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0-draft",
+  "models": [
+    {
+      "id": "community-grounds-economic-statistical-v1",
+      "name": "Community grounds economic and statistical appraisal",
+      "version": "1.0.0-draft",
+      "inputs": ["EvaluationCase", "Alternative", "CashFlow", "OutcomeMeasure", "SensitivityCase"],
+      "outputs": ["PerspectiveLedger", "DiscountedResult", "DescriptiveStatistics", "TrendEstimate", "RunReceipt"],
+      "perspectives": ["operator-financial", "government-fiscal", "social-economic"],
+      "constraints": ["separate-ledgers", "no-transfer-in-social-economic-npv", "incomplete-values-remain-unresolved", "no-automatic-recommendation"]
+    }
+  ]
+}
